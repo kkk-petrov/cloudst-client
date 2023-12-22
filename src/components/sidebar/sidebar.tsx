@@ -33,10 +33,9 @@ export const Sidebar = () => {
 
   return (
     <div className={cl.container}>
-      <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: "25px" }}>
         <div className={cl.logo}>
           <Image alt="logo" className={cl.logoIcon} height={46} width={46} src="/logo.png" />
-          Logo
+         Sky Vault 
         </div>
 
         <ul className={cl.navList}>
@@ -66,7 +65,6 @@ export const Sidebar = () => {
           {/* <button className={cl.limitButton}>Upgrade Now</button> */}
           <Button style={{ margin: "0 auto" }}>Upgrade Now</Button>
         </div>
-      </IconContext.Provider>
     </div>
   )
 }

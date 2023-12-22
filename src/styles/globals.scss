@@ -37,8 +37,8 @@
 }
 
 [data-theme='dark'] body {
-  --background: #303030;
-  --foreground: red;
+  --background: #161718;
+  --foreground: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -88,6 +88,7 @@ body {
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
+  transition: all 300ms ease;
 }
 
 a {
@@ -111,6 +112,7 @@ a {
 .container {
   width: 100%;
   height: 100%;
+  padding: 30px;
 
   font-weight: 700;
   font-size: 20px;

@@ -1,26 +1,14 @@
-"use client"
+"use client";
 
-import { ThemeProvider } from 'next-themes'
-import React, { ReactNode, useEffect, useState } from 'react'
-import { IconContext } from 'react-icons'
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { type ThemeProviderProps } from 'next-themes/dist/types';
+import { IconContext } from 'react-icons';
 
-const Providers = ({ children }: { children: ReactNode }) => {
-  const [mounted, setMounted] = useState(false)
+const Providers = ({ children, ...props }: ThemeProviderProps) => {
+  return <NextThemesProvider {...props}>
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+    <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: "25px" }}>
+      {children}</IconContext.Provider></NextThemesProvider>;
+};
 
-  if (!mounted) {
-    return children
-  }
-  return (
-
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
-  )
-}
-
-export default Providers
+export default Providers 
