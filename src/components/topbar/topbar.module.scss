@@ -1,0 +1,110 @@
+@import '@/styles/_colors';
+
+.container {
+  color: #000;
+  padding: 24px;
+  width: 100%;
+  margin-bottom: 40px;
+  background: $background;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+  // border-bottom: 1px solid red;
+
+  &::after {
+    visibility: hidden;
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: red;
+  }
+
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: transparent;
+    box-shadow: $ltgray 0px 0px 5px;
+    transition: all 300ms ease;
+    border: 1px solid $ltgray;
+    width: 500px;
+    border-radius: 30px;
+    padding: 5px 15px;
+    height: 100%;
+
+    &:focus-visible {
+      border: 1px solid $accent;
+    }
+
+    &Icon,
+    &Filter {
+      // position: absolute;
+      color: #62636680;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: all 300ms ease;
+
+      // transform: translateY(-50%);
+      // top: 50%;
+      &:hover {
+        color: $accent;
+      }
+    }
+
+    &Icon {
+      // left: 3%;
+      margin-right: 10px;
+    }
+
+    &Filter {
+      // right: 4%;
+      margin-left: auto;
+    }
+
+    &Input {
+      outline: none;
+      border: none;
+      color: $text-gray;
+      width: 100%;
+      font-weight: 300;
+      font-size: 20px;
+      background: transparent;
+    }
+  }
+
+  .uploadIcon {
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    height: 100%;
+    border-radius: 30px;
+    box-shadow: $ltgray 0px 0px 5px;
+
+
+
+    &Avatar {
+      border-radius: 100%;
+      margin-right: 10px;
+    }
+
+    &Name {
+      font-weight: 700;
+      font-size: 16px;
+    }
+  }
+
+}

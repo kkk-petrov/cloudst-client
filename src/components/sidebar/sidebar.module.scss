@@ -1,0 +1,135 @@
+@import '@/styles/_colors';
+
+$transition: all 300ms ease;
+
+.container {
+  // border-right: 1px solid red;
+
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  width: 25%;
+  height: 100vh;
+  background: $background;
+  color: $text-gray;
+  font-weight: 600;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 80px;
+    border-radius: 0% 0% 100px 0%;
+
+    background: $accent;
+    color: #fff;
+
+    // border-bottom: 1px solid red;
+    position: relative;
+
+    &::after {
+      visibility: hidden;
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: red;
+    }
+
+
+    &Icon {
+      margin-right: 15px;
+      // outline: 1px solid red;
+      background: red;
+      filter: brightness(0%);
+    }
+  }
+
+  .navList {
+    margin: 0;
+    padding: 0px 30px;
+    list-style-type: none;
+
+    &Item {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 500ms ease;
+      text-transform: capitalize;
+      background: transparent;
+      border-radius: 10px;
+
+      &.active {
+        color: $accent;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      &Icon {
+        margin-right: 15px;
+      }
+
+      &Divider {
+        height: 2px;
+        background: linear-gradient(to right, #909090, rgba(255, 255, 255, 0));
+        background: #909090;
+        opacity: 0.2;
+        margin: 20px 0 30px 0;
+        border-radius: 5px;
+        width: 100%;
+      }
+    }
+  }
+
+  .limit {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+    margin-top: auto;
+    margin-bottom: 60px;
+    width: 100%;
+
+    &Info {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 25px;
+
+      &Bar,
+      &Bar::after {
+        height: 5px;
+        border-radius: 5px;
+      }
+
+      &Bar {
+        display: block;
+        position: relative;
+        width: 100%;
+        background-color: #DDEFFC;
+        margin-bottom: 15px;
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 70%;
+          background-color: #017EFA;
+
+        }
+      }
+    }
+  }
+}
