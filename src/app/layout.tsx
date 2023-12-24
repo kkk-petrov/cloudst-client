@@ -21,12 +21,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <Sidebar />
+        <Sidebar />
 
-          <div className="content">
-            <Topbar />
+        <div className="content">
+          <Topbar />
             {children}
-          </div>
+        </div>
 
         </Providers>
       </body>
