@@ -10,9 +10,13 @@ import { Modal } from "../UI/modal/modal"
 import { GoBellFill } from "react-icons/go"
 import { Input } from "../UI/input/input"
 import Image from "next/image"
+import { UserModel } from "@/types"
 
 export const Topbar = () => {
   const [isModalActive, setIsModalActive] = useState(false)
+  const user: UserModel = { avatar: "", name: "", id: 1, email: "", isAdmin: false }
+
+  const userAvatarUrl = user.avatar || "/user.png"
 
   return (
     <div className={cl.container}>
@@ -35,7 +39,7 @@ export const Topbar = () => {
         </Button>
 
         <div className={cl.user}>
-          <Image alt="avatar" src="/user.png" height={30} width={30} className={cl.userAvatar} />
+          <Image alt="avatar" src={userAvatarUrl} height={30} width={30} className={cl.userAvatar} />
           <button className={cl.userButton} onClick={() => setIsModalActive(true)}>
             <span className={cl.userName}>User</span>
             <FaAngleDown className={cl.userButtonIcon} size="15px" />

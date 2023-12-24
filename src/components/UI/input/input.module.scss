@@ -10,14 +10,10 @@
   box-shadow: $ltgray 0px 0px 5px;
   transition: all 300ms ease;
   width: 100%;
+  height: 100%;
   border-radius: 30px;
   padding: 5px 15px;
-  height: 100%;
 
-  &Wrapper {
-    width: 40%;
-    height: 100%;
-  }
 
   &:focus-visible {
     border: 1px solid $accent;
