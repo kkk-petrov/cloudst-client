@@ -11,9 +11,16 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.8);
   transition: all 300ms ease;
+
   pointer-events: none;
   opacity: 0;
+  visibility: hidden;
 
+  &.active {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
 
 
   .modal {
@@ -34,9 +41,4 @@
       background: $background-darker;
     }
   }
-}
-
-.wrapper.active {
-  pointer-events: all;
-  opacity: 1;
 }

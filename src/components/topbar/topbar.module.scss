@@ -31,58 +31,51 @@
     background: red;
   }
 
-  .search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  .searchWrapper {
+    width: 40%;
+    height: 100%;
+    max-height: 45px;
+  }
 
+
+  .themeToggler {
+    margin-right: 20px;
+  }
+
+  .notifications {
     background: transparent;
     box-shadow: $ltgray 0px 0px 5px;
     transition: all 300ms ease;
-    border: 1px solid $ltgray;
-    width: 500px;
-    border-radius: 30px;
-    padding: 5px 15px;
-    height: 100%;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    padding: 5px 10px;
+    color: #62636690;
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
 
-    &:focus-visible {
-      border: 1px solid $accent;
+    &:hover {
+      filter: brightness(120%);
     }
 
-    &Icon,
-    &Filter {
-      // position: absolute;
-      color: #62636680;
-      vertical-align: middle;
-      cursor: pointer;
-      transition: all 300ms ease;
 
-      // transform: translateY(-50%);
-      // top: 50%;
-      &:hover {
-        color: $accent;
-      }
-    }
 
-    &Icon {
-      // left: 3%;
-      margin-right: 10px;
-    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: 13px;
+      width: 8px;
+      height: 8px;
+      background: $accent;
+      border-radius: 100%;
 
-    &Filter {
-      // right: 4%;
-      margin-left: auto;
-    }
-
-    &Input {
-      outline: none;
-      border: none;
-      color: $text-gray;
-      width: 100%;
-      font-weight: 300;
-      font-size: 20px;
-      background: transparent;
     }
   }
 
@@ -90,6 +83,7 @@
     margin-right: 10px;
     vertical-align: middle;
   }
+
 
   .user {
     transition: all 300ms ease;
@@ -100,7 +94,9 @@
     border-radius: 30px;
     box-shadow: $ltgray 0px 0px 5px;
 
-
+    &:hover {
+      filter: brightness(110%);
+    }
 
     &Avatar {
       border-radius: 100%;
@@ -138,9 +134,7 @@
     color: #fff;
     background: $background-darker;
 
-
     .search {
-
       background: $gray;
       box-shadow: none;
       border: 1px solid $ltgray;
@@ -148,11 +142,21 @@
       &Icon,
       &Filter {
         color: #fff;
+
+        &:hover {
+          color: $accent;
+        }
       }
 
       &Input {
         color: #fff;
       }
+    }
+
+    .notifications {
+      background: $gray;
+      box-shadow: none;
+      color: $text-ltgray;
     }
 
     .user {
@@ -164,9 +168,7 @@
       }
 
       &Button {
-
         &Icon {
-
           color: $text-ltgray;
         }
       }

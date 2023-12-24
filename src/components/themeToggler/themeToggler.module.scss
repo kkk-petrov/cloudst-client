@@ -6,21 +6,21 @@
 
 
   background: transparent;
+  transition: all 300ms ease;
   box-shadow: $ltgray 0px 0px 5px;
-  border: 1px solid $accent;
   border-radius: 20px;
   padding: 5px;
   height: 100%;
   width: 60px;
   cursor: pointer;
+  border: 1px solid $accent;
   outline: none;
-
 
   .dark,
   .light {
     padding: 10px;
     border-radius: 100%;
-    transition: all 500ms ease;
+    transition: all 300ms ease;
     height: 100%;
     background: $accent;
   }
@@ -31,5 +31,19 @@
 
   .light {
     margin-left: 0%;
+  }
+}
+
+[data-theme="dark"] {
+  .toggler {
+
+    background: $gray;
+    box-shadow: none;
+    border-color: transparent;
+
+    .dark,
+    .light {
+      background: $text-ltgray;
+    }
   }
 }

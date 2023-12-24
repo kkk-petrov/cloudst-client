@@ -19,8 +19,6 @@ const ThemeToggler = () => {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
     setTheme(newTheme)
-    console.log("Changing theme to", newTheme)
-    console.log(theme)
   }
 
 
