@@ -61,7 +61,7 @@
     border: none;
 
     &:hover {
-      filter: brightness(120%);
+      box-shadow: #62636640 0px 0px 10px;
     }
 
 
@@ -95,7 +95,7 @@
     box-shadow: $ltgray 0px 0px 5px;
 
     &:hover {
-      filter: brightness(110%);
+      box-shadow: #62636640 0px 0px 10px;
     }
 
     &Avatar {
@@ -157,11 +157,19 @@
       background: $gray;
       box-shadow: none;
       color: $text-ltgray;
+
+      &:hover {
+        filter: brightness(110%);
+      }
     }
 
     .user {
       box-shadow: none;
       background: $gray;
+
+      &:hover {
+        filter: brightness(110%);
+      }
 
       &Name {
         color: $text-ltgray;

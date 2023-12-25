@@ -1,6 +1,6 @@
 @import '@/styles/_colors';
 
-$transition: all 300ms ease;
+$transition: all 100ms ease;
 
 .container {
   transition: all 300ms ease;
@@ -14,37 +14,153 @@ $transition: all 300ms ease;
   background: $background;
   color: $text-gray;
   font-weight: 600;
+  position: relative;
+
+  &.hidden {
+    width: 0%;
+
+    .logo,
+    .navList,
+    .limit {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .logo {
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    .navList {
+      &Item {
+        padding: 0px;
+        background: transparent;
+      }
+    }
+
+  }
+
+
+  .logo,
+  .navList,
+  .limit {
+    visibility: visible;
+    opacity: 1;
+  }
+
+
+  .wrapper {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 500ms 400ms ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    // box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.3);
+
+    &Active {
+      opacity: 1;
+    }
+  }
+
+  .close {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: none;
+    opacity: 0.5;
+    transition: all 300ms ease;
+
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .top,
+    .bot {
+      width: 4px;
+      height: 15px;
+      border-radius: 5px;
+      background: $text-ltgray;
+      transition: all 300ms ease;
+    }
+
+    .bot {
+      margin-top: -3px;
+    }
+
+    &:hover .top,
+    &:hover .bot {
+      background: $text-gray;
+    }
+
+    &:hover .top {
+      transform: rotate(25deg);
+
+      &Rev {
+        transform: rotate(-25deg);
+      }
+    }
+
+    &:hover .bot {
+      transform: rotate(-25deg);
+
+      &Rev {
+        transform: rotate(25deg);
+      }
+    }
+  }
 
   .logo {
     display: flex;
     align-items: center;
     width: 100%;
     padding: 24px;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 22px;
+    font-weight: 800;
     margin-bottom: 80px;
     background: none;
+    transition: all 200ms ease-out;
+    overflow: hidden;
 
     color: $accent;
 
-    // border-bottom: 1px solid red;
-    // position: relative;
-    //
-    // &::after {
-    //   content: "";
-    //   position: absolute;
-    //   top: 50%;
-    //   transform: translateY(-50%);
-    //   left: 0;
-    //   width: 100%;
-    //   height: 1px;
-    //   background: red;
-    // }
+    position: relative;
+    z-index: 2;
 
+    &::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      position: absolute;
+      top: 30px;
+      left: 50px;
+      background: #FDBA2D;
+      z-index: -1;
+      opacity: 1;
+      transition: all 200ms ease;
+    }
 
     &Icon {
       margin-right: 15px;
-      // outline: 1px solid red;
+    }
+
+    div {
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 
@@ -52,6 +168,7 @@ $transition: all 300ms ease;
     margin: 0;
     padding: 0px 40px;
     list-style-type: none;
+    transition: $transition;
 
     &Item {
       display: flex;
@@ -60,13 +177,15 @@ $transition: all 300ms ease;
       align-items: center;
       padding: 15px;
       cursor: pointer;
-      transition: all 500ms ease;
+      transition: all 200ms ease;
       text-transform: capitalize;
       background: transparent;
       border-radius: 10px;
+      margin-bottom: 20px;
 
       &.active {
-        color: $accent;
+        color: #fff;
+        background: $accent;
       }
 
       &:not(:last-child) {
@@ -79,10 +198,9 @@ $transition: all 300ms ease;
 
       &Divider {
         height: 2px;
-        background: linear-gradient(to right, #909090, rgba(255, 255, 255, 0));
-        background: #909090;
-        opacity: 0.2;
-        margin: 30px auto 10px auto;
+        background: linear-gradient(to right, #90909000, #909090, #90909000);
+        opacity: .1;
+        margin: 30px 0px 0px 0px;
         border-radius: 5px;
         width: 80%;
 
@@ -97,12 +215,14 @@ $transition: all 300ms ease;
     margin-top: auto;
     margin-bottom: 60px;
     width: 100%;
+    transition: $transition;
 
     &Info {
       font-size: 16px;
       font-weight: 400;
       text-align: center;
       margin-bottom: 25px;
+      white-space: nowrap;
 
       &Bar,
       &Bar::after {
@@ -138,6 +258,27 @@ $transition: all 300ms ease;
   .container {
     background: $background-black;
     color: $text-ltgray;
+
+    .wrapper {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .close {
+
+      &:hover.top,
+      &:hover.bot {
+        background: #fff;
+        opacity: 1;
+      }
+    }
+
+    .navList {
+      &Item {
+        &.active {
+          background: $gray;
+        }
+      }
+    }
 
     .limit {
       &Info {

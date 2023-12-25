@@ -7,64 +7,66 @@ import { GoShareAndroid } from "react-icons/go";
 import { BsGear, BsTrash3 } from "react-icons/bs";
 
 import cl from "./sidebar.module.scss"
-import { IconContext } from "react-icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../UI/button/button";
-import Image from "next/image";
+import { FaCloud } from "react-icons/fa";
+import { useSidebar } from "@/context/sidebarContext";
 
 export const Sidebar = () => {
-  let pathname = usePathname()
-  useEffect(() => {
-    setCurrentPage(pathname)
-  }, [pathname])
+  const currentPage = usePathname().split('/')[1] || "/"
+  const [isWrapperHovered, setIsWrapperHovered] = useState(false)
+  const { isSidebarHidden, setIsSidebarHidden } = useSidebar()
 
-
-  const [currentPage, setCurrentPage] = useState<string | null>(pathname)
   const nav = [
     { name: "dashboard", icon: <MdDashboard />, path: "/" },
-    { name: "recent", icon: <IoMdTime />, path: "/recent" },
-    { name: "favorites", icon: <IoMdHeartEmpty />, path: "/favorites" },
-    { name: "shared", icon: <GoShareAndroid />, path: "/shared" },
+    { name: "recent", icon: <IoMdTime />, path: "recent" },
+    { name: "favorites", icon: <IoMdHeartEmpty />, path: "favorites" },
+    { name: "shared", icon: <GoShareAndroid />, path: "shared" },
     { name: "divider", icon: null, path: null },
-    { name: "trash", icon: <BsTrash3 />, path: "/trash" },
-    { name: "settings", icon: <BsGear />, path: "/settings" },
+    { name: "trash", icon: <BsTrash3 />, path: "trash" },
+    { name: "settings", icon: <BsGear />, path: "settings" },
   ]
 
   return (
-    <div className={cl.container}>
-        <div className={cl.logo}>
-          <Image alt="logo" className={cl.logoIcon} height={46} width={46} src="/logo.png" />
-         Sky Vault 
+    <div className={`${cl.container} ${isSidebarHidden && cl.hidden}`}>
+      <div className={`${cl.wrapper} ${isWrapperHovered && !isSidebarHidden ? cl.wrapperActive : ""}`}></div>
+      <div className={cl.logo}>
+        <FaCloud className={cl.logoIcon} size="45px" />
+        <div>Sky Vault</div>
+      </div>
+
+      <button className={cl.close} onClick={() => setIsSidebarHidden(prev => !prev)} onMouseOver={() => setIsWrapperHovered(true)} onMouseLeave={() => setIsWrapperHovered(false)}>
+        <div className={`${cl.top} ${isSidebarHidden && cl.topRev}`}></div>
+        <div className={`${cl.bot} ${isSidebarHidden && cl.botRev}`}></div>
+      </button>
+
+      <ul className={cl.navList}>
+        {nav.map(item => (
+          item.name !== "divider"
+            ?
+            <li key={item.name}>
+              <Link
+                href={item.path || "error"}
+                className={`${cl.navListItem} ${item.path === currentPage ? cl.active : ""}`}
+              >
+                <span className={cl.navListItemIcon}>{item.icon}</span>
+                {item.name}
+              </Link>
+            </li>
+            :
+            <div key={item.name} className={cl.navListItemDivider} />
+
+        ))}
+      </ul>
+
+      <div className={cl.limit}>
+        <div className={cl.limitInfo}>
+          <span className={cl.limitInfoBar} />
+          <i>276GB</i> of 500GB Used
         </div>
-
-        <ul className={cl.navList}>
-          {nav.map(item => (
-            item.name !== "divider"
-              ?
-              <li key={item.name}>
-                <Link
-                  href={item.path || "error"}
-                  className={`${cl.navListItem} ${item.path === currentPage ? cl.active : ""}`}
-                >
-                  <span className={cl.navListItemIcon}>{item.icon}</span>
-                  {item.name}
-                </Link>
-              </li>
-              :
-              <div key={item.name} className={cl.navListItemDivider} />
-
-          ))}
-        </ul>
-
-        <div className={cl.limit}>
-          <div className={cl.limitInfo}>
-            <span className={cl.limitInfoBar} />
-            276GB of 500GB Used
-          </div>
-          {/* <button className={cl.limitButton}>Upgrade Now</button> */}
-          <Button style={{ margin: "0 auto" }}>Upgrade Now</Button>
-        </div>
+        <Button style={{ margin: "0 auto" }}>Upgrade Now</Button>
+      </div>
     </div>
   )
 }
