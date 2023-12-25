@@ -11,15 +11,27 @@ const SidebarContext = createContext<SidebarContextProps>({
   setIsSidebarHidden: () => { },
 });
 
+
 export const SidebarProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [mounted, setMounted] = useState(false)
   const [isSidebarHidden, setIsSidebarHidden] = useState(() => {
-    const storedValue = window.localStorage.getItem('isSidebarHidden');
-    return storedValue ? JSON.parse(storedValue) : false;
+    if (typeof window !== 'undefined') {
+      const storedValue = window.localStorage.getItem('isSidebarHidden');
+      return storedValue ? JSON.parse(storedValue) : false;
+    }
   });
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     window.localStorage.setItem('isSidebarHidden', JSON.stringify(isSidebarHidden));
   }, [isSidebarHidden]);
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <SidebarContext.Provider value={{ isSidebarHidden, setIsSidebarHidden }}>
