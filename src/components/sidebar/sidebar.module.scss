@@ -19,14 +19,18 @@ $transition: all 100ms ease;
   &.hidden {
     width: 0%;
 
-    .logo,
+    .logoContainer,
     .navList,
     .limit {
       visibility: hidden;
       opacity: 0;
+      left: -300px;
+      filter: blur(10px);
+
     }
 
-    .logo {
+
+    .logoContainer {
       &::after {
         opacity: 0;
       }
@@ -34,19 +38,37 @@ $transition: all 100ms ease;
 
     .navList {
       &Item {
-        padding: 0px;
+        // padding: 0px;
         background: transparent;
+        opacity: 0;
+        transition: all 200ms 0ms ease;
+      }
+    }
+
+    .limit {
+      &Info {
+        opacity: 0;
+        transition: all 200ms 0ms ease;
+      }
+
+      &Button {
+        opacity: 0;
+        transition: all 200ms 0ms ease;
       }
     }
 
   }
 
 
-  .logo,
+  .logoContainer,
   .navList,
   .limit {
     visibility: visible;
     opacity: 1;
+    filter: blur(0);
+    left: 0;
+    position: relative;
+    transition: all 400ms ease;
   }
 
 
@@ -55,18 +77,17 @@ $transition: all 100ms ease;
     height: 100vh;
     width: 100%;
     background: rgba(0, 0, 0, 0.1);
-    transition: all 500ms 400ms ease;
+    transition: all 600ms ease;
     opacity: 0;
     pointer-events: none;
     z-index: 10;
-    // box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.3);
 
     &Active {
       opacity: 1;
     }
   }
 
-  .close {
+  .hide {
     cursor: pointer;
     outline: none;
     border: none;
@@ -123,65 +144,32 @@ $transition: all 100ms ease;
     }
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
+  .logoContainer {
+
     width: 100%;
     padding: 24px;
-    font-size: 22px;
-    font-weight: 800;
     margin-bottom: 80px;
-    background: none;
-    transition: all 200ms ease-out;
-    overflow: hidden;
-
-    color: $accent;
-
-    position: relative;
-    z-index: 2;
-
-    &::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      border-radius: 100%;
-      position: absolute;
-      top: 30px;
-      left: 50px;
-      background: #FDBA2D;
-      z-index: -1;
-      opacity: 1;
-      transition: all 200ms ease;
-    }
-
-    &Icon {
-      margin-right: 15px;
-    }
-
-    div {
-      overflow: hidden;
-      white-space: nowrap;
-    }
   }
+
 
   .navList {
     margin: 0;
     padding: 0px 40px;
     list-style-type: none;
-    transition: $transition;
 
     &Item {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      padding: 15px;
+      padding: 10px 15px;
       cursor: pointer;
-      transition: all 200ms ease;
+      transition: all 500ms 200ms ease, background 300ms 200ms ease, color 300ms 200ms ease;
       text-transform: capitalize;
       background: transparent;
       border-radius: 10px;
       margin-bottom: 20px;
+      opacity: 1;
 
       &.active {
         color: #fff;
@@ -200,7 +188,7 @@ $transition: all 100ms ease;
         height: 2px;
         background: linear-gradient(to right, #90909000, #909090, #90909000);
         opacity: .1;
-        margin: 30px 0px 0px 0px;
+        margin: 20px 0px;
         border-radius: 5px;
         width: 80%;
 
@@ -215,7 +203,8 @@ $transition: all 100ms ease;
     margin-top: auto;
     margin-bottom: 60px;
     width: 100%;
-    transition: $transition;
+    opacity: 1;
+    visibility: visible;
 
     &Info {
       font-size: 16px;
@@ -223,6 +212,8 @@ $transition: all 100ms ease;
       text-align: center;
       margin-bottom: 25px;
       white-space: nowrap;
+      opacity: 1;
+      transition: all 500ms 300ms ease;
 
       &Bar,
       &Bar::after {
@@ -248,6 +239,16 @@ $transition: all 100ms ease;
 
         }
       }
+    }
+
+    &Button {
+      width: 100%;
+      transition: all 500ms 300ms ease;
+      opacity: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
     }
   }
 }

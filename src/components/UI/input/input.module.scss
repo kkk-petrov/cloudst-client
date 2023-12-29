@@ -1,6 +1,6 @@
 @import "@/styles/_colors.scss";
 
-.search {
+.wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -10,41 +10,11 @@
   box-shadow: $ltgray 0px 0px 5px;
   transition: all 300ms ease;
   width: 100%;
-  height: 100%;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 5px 15px;
+  z-index: 0;
 
-
-  &:focus-visible {
-    border: 1px solid $accent;
-  }
-
-  &Icon,
-  &Filter {
-    // position: absolute;
-    color: #62636680;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: all 300ms ease;
-
-    // transform: translateY(-50%);
-    // top: 50%;
-    &:hover {
-      color: $accent;
-    }
-  }
-
-  &Icon {
-    // left: 3%;
-    margin-right: 10px;
-  }
-
-  &Filter {
-    // right: 4%;
-    margin-left: auto;
-  }
-
-  &Input {
+  .input {
     outline: none;
     border: none;
     color: $text-gray;
@@ -55,25 +25,13 @@
   }
 }
 
-
-
 [data-theme='dark'] {
-
-  .search {
+  .wrapper {
     background: $gray;
     box-shadow: none;
     border: 1px solid $ltgray;
 
-    &Icon,
-    &Filter {
-      color: #fff;
-
-      &:hover {
-        color: $accent;
-      }
-    }
-
-    &Input {
+    .input {
       color: #fff;
     }
   }

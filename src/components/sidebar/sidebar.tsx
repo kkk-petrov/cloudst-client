@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Button } from "../UI/button/button";
 import { FaCloud } from "react-icons/fa";
 import { useSidebar } from "@/context/sidebarContext";
+import { Logo } from "../logo/logo";
 
 export const Sidebar = () => {
   const currentPage = usePathname().split('/')[1] || "/"
@@ -31,12 +32,11 @@ export const Sidebar = () => {
   return (
     <div className={`${cl.container} ${isSidebarHidden && cl.hidden}`}>
       <div className={`${cl.wrapper} ${isWrapperHovered && !isSidebarHidden ? cl.wrapperActive : ""}`}></div>
-      <div className={cl.logo}>
-        <FaCloud className={cl.logoIcon} size="45px" />
-        <div>Sky Vault</div>
+      <div className={cl.logoContainer}>
+        <Logo/>
       </div>
 
-      <button className={cl.close} onClick={() => setIsSidebarHidden(prev => !prev)} onMouseOver={() => setIsWrapperHovered(true)} onMouseLeave={() => setIsWrapperHovered(false)}>
+      <button className={cl.hide} onClick={() => setIsSidebarHidden(prev => !prev)} onMouseOver={() => setIsWrapperHovered(true)} onMouseLeave={() => setIsWrapperHovered(false)}>
         <div className={`${cl.top} ${isSidebarHidden && cl.topRev}`}></div>
         <div className={`${cl.bot} ${isSidebarHidden && cl.botRev}`}></div>
       </button>
@@ -65,7 +65,10 @@ export const Sidebar = () => {
           <span className={cl.limitInfoBar} />
           <i>276GB</i> of 500GB Used
         </div>
-        <Button style={{ margin: "0 auto" }}>Upgrade Now</Button>
+        <div className={cl.limitButton}>
+          <Button>Upgrade Now</Button>
+
+        </div>
       </div>
     </div>
   )

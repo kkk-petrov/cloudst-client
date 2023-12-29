@@ -5,23 +5,30 @@ import cl from "./topbar.module.scss"
 import { Button } from "../UI/button/button"
 import { IoMdCloudDownload } from "react-icons/io"
 import ThemeToggler from "../themeToggler/themeToggler"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal } from "../UI/modal/modal"
 import { GoBellFill } from "react-icons/go"
-import { Input } from "../UI/input/input"
 import Image from "next/image"
 import { UserModel } from "@/types"
+import { getSession, useSession } from "next-auth/react"
+import Link from "next/link"
+import { useSidebar } from "@/context/sidebarContext"
+import { SearchInput } from "../searchInput/searchInput"
+import { Logo } from "../logo/logo"
 
 export const Topbar = () => {
   const [isModalActive, setIsModalActive] = useState(false)
-  const user: UserModel = { avatar: "", name: "", id: 1, email: "", isAdmin: false }
+  const session = useSession()
+  const { isSidebarHidden } = useSidebar()
 
-  const userAvatarUrl = user.avatar || "/user.png"
+  const data = session.data?.user as { token: string, user: UserModel }
+  const user = data?.user
+  const userAvatarUrl = user?.avatar || "/user.png"
 
   return (
     <div className={cl.container}>
       <div className={cl.searchWrapper}>
-        <Input />
+        <SearchInput />
       </div>
 
       <div style={{ display: "flex", alignItems: "center", height: "100%", }}>
@@ -33,20 +40,20 @@ export const Topbar = () => {
           <GoBellFill size="25px" />
         </button>
 
-        <Button style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
+        <Button onClick={() => setIsModalActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
           <IoMdCloudDownload className={cl.uploadIcon} />
           Upload
         </Button>
 
         <div className={cl.user}>
           <Image alt="avatar" src={userAvatarUrl} height={30} width={30} className={cl.userAvatar} />
-          <button className={cl.userButton} onClick={() => setIsModalActive(true)}>
-            <span className={cl.userName}>User</span>
+          <Link href="api/auth/signout" className={cl.userButton}>
+            <span className={cl.userName}>{user?.name}</span>
             <FaAngleDown className={cl.userButtonIcon} size="15px" />
-          </button>
+          </Link>
         </div>
 
-        <Modal isActive={isModalActive} setIsActive={setIsModalActive}></Modal>
+        <Modal isSidebarHidden={isSidebarHidden} isActive={isModalActive} setIsActive={setIsModalActive}></Modal>
       </div>
 
     </div>

@@ -1,0 +1,55 @@
+@import "@/styles/_colors.scss";
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 800;
+  background: none;
+  transition: all 300ms ease;
+  overflow: hidden;
+  color: $accent;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+
+  &::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    position: absolute;
+    top: 3px;
+    left: 25px;
+    background: #FDBA2D;
+    z-index: -1;
+    opacity: 1;
+    transition: all 200ms ease;
+  }
+
+  &Icon {
+    margin-right: 15px;
+  }
+
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    // visibility: hidden;
+    // max-width: 0%;
+    // opacity: 0;
+    // transition: all 300ms ease;
+    //
+    // max-width: 0;
+    //
+    // &Visible {
+    //   visibility: visible;
+    //   opacity: 1;
+    //   max-width: 100%;
+    //
+    // }
+  }
+}
+
+// [data-theme="dark"]{
+//
+// }
