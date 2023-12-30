@@ -1,0 +1,16 @@
+@import "@/styles/_colors.scss";
+
+.CircularProgressbar-path {
+  stroke: $accent;
+}
+
+.CircularProgressbar-trail {
+  stroke: #d6d6d6;
+  transition: all 200ms ease;
+}
+
+[data-theme="dark"] {
+  .CircularProgressbar-trail {
+    stroke: $ltgray;
+  }
+}

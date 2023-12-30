@@ -1,0 +1,85 @@
+@import "@/styles/_colors.scss";
+
+.typeList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+
+
+  &Item {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 10px);
+    height: calc(50% - 10px);
+    gap: 10px;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 200ms ease;
+
+    &:nth-child(-n+2) {
+      margin-bottom: 10px;
+    }
+
+    &:nth-child(1) {
+      background: rgba($orange, .1);
+    }
+
+    &:nth-child(2) {
+      background: rgba($purple, .1);
+    }
+
+    &:nth-child(3) {
+      background: rgba($ltblue, .1);
+    }
+
+    &:nth-child(4) {
+      background: rgba($blue, .1);
+    }
+
+    &Info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: $text-ltgray;
+      font-weight: 400;
+
+      div {
+        font-size: 14px;
+        color: $text-gray;
+        font-weight: 600;
+
+        span {
+          margin-top: 5px;
+          font-size: 10px;
+          color: $text-ltgray;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+}
+
+[data-theme="dark"] {
+  .typeList {
+    &Item {
+      &Info {
+        color: $text-ltgray;
+
+        div {
+          color: #fff;
+
+          span {
+            color: $text-ltgray;
+          }
+        }
+      }
+    }
+  }
+}
