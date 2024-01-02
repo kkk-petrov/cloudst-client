@@ -53,6 +53,7 @@
         font-size: 14px;
         color: $text-gray;
         font-weight: 600;
+        transition: all 200ms ease;
 
         span {
           margin-top: 5px;
@@ -73,7 +74,7 @@
         color: $text-ltgray;
 
         div {
-          color: #fff;
+          color: #ffffff90;
 
           span {
             color: $text-ltgray;

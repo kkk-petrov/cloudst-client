@@ -10,6 +10,10 @@
 }
 
 [data-theme="dark"] {
+  .CircularProgressbar-path {
+    stroke: $accent;
+  }
+
   .CircularProgressbar-trail {
     stroke: $ltgray;
   }

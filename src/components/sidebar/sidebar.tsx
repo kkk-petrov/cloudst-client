@@ -33,7 +33,7 @@ export const Sidebar = () => {
     <div className={`${cl.container} ${isSidebarHidden && cl.hidden}`}>
       <div className={`${cl.wrapper} ${isWrapperHovered && !isSidebarHidden ? cl.wrapperActive : ""}`}></div>
       <div className={cl.logoContainer}>
-        <Logo/>
+        <Logo />
       </div>
 
       <button className={cl.hide} onClick={() => setIsSidebarHidden(prev => !prev)} onMouseOver={() => setIsWrapperHovered(true)} onMouseLeave={() => setIsWrapperHovered(false)}>
@@ -56,18 +56,16 @@ export const Sidebar = () => {
             </li>
             :
             <div key={item.name} className={cl.navListItemDivider} />
-
         ))}
       </ul>
 
       <div className={cl.limit}>
         <div className={cl.limitInfo}>
           <span className={cl.limitInfoBar} />
-          <i>276GB</i> of 500GB Used
+          275GB of 500GB Used
         </div>
         <div className={cl.limitButton}>
           <Button>Upgrade Now</Button>
-
         </div>
       </div>
     </div>

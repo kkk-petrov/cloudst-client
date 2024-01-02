@@ -9,10 +9,11 @@ export const StorageProgress = () => {
   const used = 275
   const percentage = Math.round((used / total) * 100)
 
-  const size = 180
+  const size = 190
   const styles = buildStyles({
     rotation: 0.25,
     strokeLinecap: 'round',
+    pathColor: "#017EFA",
   })
 
   return (
@@ -22,7 +23,7 @@ export const StorageProgress = () => {
           <CircularProgressbarWithChildren strokeWidth={10} value={percentage} styles={styles}>
             <div className={cl.inside}>
               {percentage}%
-              <span>Total: {total}</span>
+              <span>Total: {total}GB</span>
             </div>
           </CircularProgressbarWithChildren>
         </div>

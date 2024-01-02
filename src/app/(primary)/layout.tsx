@@ -22,7 +22,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers session={session} props={{ defaultTheme: "system" }}>
+        <Providers session={session} props={{ defaultTheme: "dark" }}>
           <Sidebar />
 
           <main className="main">

@@ -6,6 +6,8 @@ import { Wrapper } from '@/components/UI/wrapper/wrapper'
 import { PinnedFiles } from '@/components/pinnedFiles/pinnedFiles'
 import { TypeFilter } from '@/components/typeFilter/typeFilter'
 import { StorageProgress } from '@/components/storageProgress/storageProgress'
+import { files } from '@/dummy'
+import { FileTable } from '@/components/fileTable/fileTable'
 
 
 export default function Home() {
@@ -16,12 +18,7 @@ export default function Home() {
         <PinnedFiles />
         <StorageProgress />
       </div>
-      <Wrapper>
-        Dashboard
-      </Wrapper>
-
-      <div>
-      </div>
+      <FileTable title="Recent Files" files={files} />
     </div >
 
   )
