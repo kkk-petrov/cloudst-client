@@ -4,6 +4,9 @@ import cl from "./fileTable.module.scss"
 import Link from "next/link"
 import Image from "next/image"
 import { FileIcon } from "../fileIcon/fileIcon"
+import { HiDotsHorizontal } from "react-icons/hi";
+import { users } from "@/dummy"
+import { Navigate } from "../UI/navigate/navigate"
 
 interface Props {
   title: string
@@ -11,11 +14,13 @@ interface Props {
 }
 
 export const FileTable = ({ title, files }: Props) => {
+  const shared = users
+
   return (
     <Wrapper>
       <div className={cl.container}>
         <div className={cl.text}>
-          {title} <Link href="#">See More</Link>
+          {title} <Navigate to="#">See More</Navigate>
         </div>
         <table className={cl.table}>
           <tr style={{ color: "#626366" }}>
@@ -26,13 +31,27 @@ export const FileTable = ({ title, files }: Props) => {
             <td></td>
           </tr>
           {files.map(file => (
-            <tr>
+            <tr key={file.id}>
               <td><FileIcon type={file.type} size={40} style={{ marginRight: "10px" }} />{file.originalName}</td>
-              <td>{file.size}MB</td>
+              <td>{file.size >= 1000 ? `${(file.size / 1000).toFixed(1)} GB` : `${file.size} MB`}</td>
               <td>{file.createdAt}</td>
-              <td style={{ textAlign: "center" }}>Only You</td>
-              {/* <td><Image className={cl.img} src="/user.png" alt="avatar" height={30} width={30} style={{ borderRadius: "100%" }} /></td> */}
-              <td>...</td>
+              <td style={{ textAlign: "center" }}>
+                {
+                  file.sharedWith
+                    ? shared.map(user => (
+                      <Image
+                        className={cl.img}
+                        src={user.avatar === "" ? "/user.png" : user.avatar}
+                        alt="avatar"
+                        height={30}
+                        width={30}
+                        key={user.id}
+                      />
+                    ))
+                    : "Only You"
+                }
+              </td>
+              <td><HiDotsHorizontal className={cl.icon} size={26} /></td>
             </tr>
           ))}
         </table>

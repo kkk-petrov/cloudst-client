@@ -1,8 +1,9 @@
-import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
-import { UserModel } from "@/types";
+import { AuthService } from "@/services/authService";
+
+const authService = new AuthService
 
 export const options: NextAuthOptions = {
   providers: [
@@ -24,19 +25,7 @@ export const options: NextAuthOptions = {
         }
       },
       async authorize(credentials) {
-        try {
-          console.log("sending request to ", process.env.API_URL + "/auth/login")
-          const res = await axios.post(process.env.API_URL + "/auth/login", credentials)
-          const data = res.data
-          console.log(data)
-
-          if (res.status === 200 && data) {
-            return data
-          }
-          return null
-        } catch (err) {
-          console.error('Error during request:', err);
-        }
+        return authService.login(credentials)
       }
     })
 

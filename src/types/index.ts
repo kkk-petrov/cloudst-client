@@ -1,10 +1,11 @@
+type UserID = number
+
 export interface UserModel {
-  id: number
+  id: UserID
   email: string
   name: string
   password: string
   avatar: string
-  isAdmin: boolean
   files: FileModel[]
   folders: FolderModel[]
   createdAt: Date
@@ -18,14 +19,15 @@ export interface FileModel {
   size: number
   folderId?: number
   Folder?: FolderModel
-  ownerId?: number
-  createdAt:string 
+  ownerId?: UserID
+  createdAt: string
+  sharedWith?: UserID[]
 }
 
 export interface FolderModel {
   id: number
   files: FileModel[]
   name: string
-  ownerId: number
+  ownerId: UserID
   createdAt: Date
 }

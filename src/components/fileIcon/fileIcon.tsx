@@ -7,7 +7,7 @@ interface Props {
   type: string
   size?: number
   background?: boolean
-  style: CSSProperties
+  style?: CSSProperties
 }
 
 export const FileIcon = ({ type, size, background, style }: Props) => {

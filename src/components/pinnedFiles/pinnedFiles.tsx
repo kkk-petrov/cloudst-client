@@ -3,6 +3,7 @@ import cl from './pinnedFiles.module.scss'
 import { Wrapper } from '../UI/wrapper/wrapper'
 import { FileIcon } from '../fileIcon/fileIcon'
 import { TiPin } from 'react-icons/ti'
+import { Navigate } from '../UI/navigate/navigate'
 
 export const PinnedFiles = () => {
   const iconSize = 35
@@ -12,7 +13,7 @@ export const PinnedFiles = () => {
       <div className={cl.pinned}>
         <div className={cl.pinnedText}>
           Pinned Files
-          <span>See More</span>
+          <Navigate to="#">See More</Navigate>
         </div>
         <ul className={cl.pinnedList}>
           <li className={cl.pinnedListItem}>
