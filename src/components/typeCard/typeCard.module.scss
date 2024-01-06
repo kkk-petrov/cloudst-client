@@ -1,0 +1,56 @@
+@import "@/styles/_colors.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 10px);
+  height: calc(50% - 10px);
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 200ms ease;
+
+  &:nth-child(-n+2) {
+    margin-bottom: 10px;
+  }
+
+  &Info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: $text-ltgray;
+    font-weight: 400;
+
+    div {
+      font-size: 14px;
+      color: $text-gray;
+      font-weight: 600;
+      transition: all 200ms ease;
+
+      span {
+        margin-top: 5px;
+        font-size: 10px;
+        color: $text-ltgray;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .card {
+    &Info {
+      color: $text-ltgray;
+
+      div {
+        color: #ffffff90;
+
+        span {
+          color: $text-ltgray;
+        }
+      }
+    }
+  }
+}

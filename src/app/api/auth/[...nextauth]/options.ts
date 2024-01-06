@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
 import { AuthService } from "@/services/authService";
 
-const authService = new AuthService
+const authService = new AuthService()
 
 export const options: NextAuthOptions = {
   providers: [
@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
         }
       },
       async authorize(credentials) {
-        return authService.login(credentials)
+        return authService.login(credentials);
       }
     })
 
@@ -34,11 +34,11 @@ export const options: NextAuthOptions = {
     brandColor: "#017EFA"
   },
   // pages: {
-  //   signIn: "/auth/signin",
-  //   signOut: "/auth/signout",
-  //   error: "/auth/error",
-  //   verifyRequest: '/auth/verify',
-  //   newUser: '/'
+  //   // signIn: "/auth/signin",
+  //   // signOut: "/auth/signout",
+  //   // error: "/auth/error",
+  //   // verifyRequest: '/auth/verify',
+  //   // newUser: '/'
   // },
   callbacks: {
     async jwt({ token, user }) {

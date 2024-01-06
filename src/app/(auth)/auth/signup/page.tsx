@@ -1,9 +1,10 @@
-import React from 'react'
+"use client"
+import { SignupForm } from '@/components/signupForm/signupForm';
 
-const Signup = () => {
+export default function Signup() {
   return (
-    <div>Signup</div>
+    <div className='container'>
+      <SignupForm />
+    </div>
   )
 }
-
-export default Signup

@@ -1,0 +1,27 @@
+@import "@/styles/_colors.scss";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px dotted $accent;
+    animation: spin 1s infinite ease;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

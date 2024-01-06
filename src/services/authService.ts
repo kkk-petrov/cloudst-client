@@ -1,43 +1,42 @@
 import { getAxiosInstance } from "@/helpers/getAxiosInstance";
-import { UserModel } from "@/types";
+import { LoginData, RegisterData, UserModel } from "@/types";
+
+
+interface AuthResponse {
+  user: UserModel
+  token: string
+}
+
+const OK = 200 || 201
 
 export class AuthService {
-  public async register(userData: Partial<UserModel>) {
+  private async doRequest(url: string, data: LoginData | RegisterData | undefined) {
+    console.log(data)
+
     try {
       const axiosInstance = await getAxiosInstance()
       if (!axiosInstance) return null
 
-      const res = await axiosInstance.post('/auth/register', userData);
-      const data = res.data;
-      console.log(data)
+      const res = await axiosInstance.post(url, data);
+      const user = res.data;
 
-      if (res.status === 200 && data) {
-        return data
+      if (user) {
+        console.log("OK")
+        return user
       }
+
       return null
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error during request: ', error);
       return null;
     }
   }
 
-  public async login(credentials: Record<"email" | "password", string> | undefined) {
-    try {
-      const axiosInstance = await getAxiosInstance()
-      if (!axiosInstance) return null
+  public async register(data: RegisterData): Promise<AuthResponse> {
+    return this.doRequest('/auth/register', data);
+  }
 
-      const res = await axiosInstance.post("/auth/login", credentials)
-      const data = res.data
-      console.log(data)
-
-      if (res.status === 200 && data) {
-        return data
-      }
-      return null
-    } catch (err) {
-      console.error('Error during request:', err);
-      return null
-    }
-
+  public async login(data: LoginData | undefined): Promise<AuthResponse> {
+    return this.doRequest("/auth/login", data)
   }
 }
