@@ -43,6 +43,14 @@ export const files: FileModel[] = [
     originalName: "wallpaper.jpeg",
     createdAt: "Nov 06, 2023"
   },
+  {
+    id: 5,
+    desc: "file",
+    size: 0.8,
+    type: "unknown",
+    originalName: "file",
+    createdAt: "Nov 01, 2023"
+  },
 ]
 
 export const users = [

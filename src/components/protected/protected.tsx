@@ -1,9 +1,9 @@
 "use client"
 
-import { useAuth } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 import { Loader } from '../loader/loader';
+import { useAuth } from '@/hooks/useAuth';
 
 interface Props {
   children: ReactNode;

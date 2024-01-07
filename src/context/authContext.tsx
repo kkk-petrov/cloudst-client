@@ -10,7 +10,7 @@ interface AuthContextProps {
   isSessionChecked: boolean
 }
 
-const AuthContext = createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   isAuthenticated: null,
   isSessionChecked: false,
 });
@@ -41,6 +41,3 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext)
-}

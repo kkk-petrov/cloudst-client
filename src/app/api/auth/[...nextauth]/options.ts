@@ -1,9 +1,9 @@
+import { authService } from "@/services";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
-import { AuthService } from "@/services/authService";
+import { LoginData } from "@/types";
 
-const authService = new AuthService()
 
 export const options: NextAuthOptions = {
   providers: [
@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
         }
       },
       async authorize(credentials) {
-        return authService.login(credentials);
+        return await authService.login(credentials as LoginData);
       }
     })
 

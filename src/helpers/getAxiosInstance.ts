@@ -8,15 +8,12 @@ export const getAxiosInstance = async () => {
   }
 
   try {
-    console.log("ok 1")
-
     const session = await getSession();
 
     let token: string | null = null
     if (session && session.user) {
       token = (session.user as { token: string }).token;
     }
-    console.log("ok 2")
 
     return axios.create({
       baseURL: API_URL,

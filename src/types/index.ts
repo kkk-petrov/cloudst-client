@@ -1,4 +1,6 @@
-type UserID = number
+export type UserID = number
+export type FileID = number
+export type FolderID = number
 
 export interface UserModel {
   id: UserID
@@ -6,27 +8,26 @@ export interface UserModel {
   name: string
   password: string
   avatar: string
-  files: FileModel[]
-  folders: FolderModel[]
+  files: FileID[] | null
+  folders: FolderID[] | null
   createdAt: Date
 }
 
 export interface FileModel {
-  id: number
+  id: FileID
   type: string
   originalName: string
   desc: string
   size: number
-  folderId?: number
-  Folder?: FolderModel
+  folderId?: FolderID
   ownerId?: UserID
   createdAt: string
   sharedWith?: UserID[]
 }
 
 export interface FolderModel {
-  id: number
-  files: FileModel[]
+  id: FolderID
+  files: FileID[] | null
   name: string
   ownerId: UserID
   createdAt: Date

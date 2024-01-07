@@ -2,11 +2,20 @@ import React from 'react'
 import cl from "./logo.module.scss"
 import { FaCloud } from 'react-icons/fa'
 
-export const Logo = () => {
+interface Props {
+  onlyIcon?: boolean
+
+  // TODO: logo size
+  // size?: number
+}
+
+export const Logo = ({ onlyIcon = false }: Props) => {
   return (
     <div className={cl.logo}>
-      <FaCloud className={cl.logoIcon} size="45px" />
-      <div className={cl.text}>Sky Vault</div>
+      <div className={cl.logoIconWrapper}>
+        <FaCloud className={cl.logoIcon} size={onlyIcon ? "60px" : "45px"} />
+      </div>
+      {!onlyIcon && <div className={cl.text}>Sky Vault</div>}
     </div>
   )
 }

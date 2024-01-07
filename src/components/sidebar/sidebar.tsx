@@ -11,8 +11,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../UI/button/button";
 import { FaCloud } from "react-icons/fa";
-import { useSidebar } from "@/context/sidebarContext";
 import { Logo } from "../logo/logo";
+import { useSidebar } from "@/hooks/useSidebar";
 
 export const Sidebar = () => {
   const currentPage = usePathname().split('/')[1] || "/"

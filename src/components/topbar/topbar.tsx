@@ -12,8 +12,8 @@ import Image from "next/image"
 import { UserModel } from "@/types"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import { useSidebar } from "@/context/sidebarContext"
 import { SearchInput } from "../searchInput/searchInput"
+import { useSidebar } from "@/hooks/useSidebar"
 
 export const Topbar = () => {
   const [isModalActive, setIsModalActive] = useState(false)

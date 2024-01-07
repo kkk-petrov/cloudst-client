@@ -6,7 +6,7 @@ interface SidebarContextProps {
   setIsSidebarHidden: Dispatch<SetStateAction<boolean>>;
 }
 
-const SidebarContext = createContext<SidebarContextProps>({
+export const SidebarContext = createContext<SidebarContextProps>({
   isSidebarHidden: false,
   setIsSidebarHidden: () => { },
 });
@@ -28,8 +28,4 @@ export const SidebarProvider: FC<PropsWithChildren> = ({ children }) => {
       {children}
     </SidebarContext.Provider>
   );
-};
-
-export const useSidebar = () => {
-  return useContext(SidebarContext);
 };

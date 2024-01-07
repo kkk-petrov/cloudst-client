@@ -32,7 +32,7 @@ export const FileTable = ({ title, files }: Props) => {
           </tr>
           {files.map(file => (
             <tr key={file.id}>
-              <td><FileIcon type={file.type} size={40} style={{ marginRight: "10px" }} />{file.originalName}</td>
+              <td><FileIcon type={file.type} size={40} style={{ marginRight: "15px" }} />{file.originalName}</td>
               <td>{file.size >= 1000 ? `${(file.size / 1000).toFixed(1)} GB` : `${file.size} MB`}</td>
               <td>{file.createdAt}</td>
               <td style={{ textAlign: "center" }}>

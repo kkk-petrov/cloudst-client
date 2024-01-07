@@ -6,10 +6,9 @@ import { ChangeEvent, MouseEvent, useState } from 'react';
 import { RegisterData } from '@/types';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/UI/button/button';
-import { AuthService } from '@/services/authService';
 import { signIn } from 'next-auth/react';
+import { authService } from '@/services';
 
-const authService = new AuthService()
 
 export const SignupForm = () => {
   const [inputs, setInputs] = useState({ name: '', email: '', password: '' });
