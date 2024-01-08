@@ -27,7 +27,7 @@ export const FileTable = ({ title, files }: Props) => {
             <td>Name</td>
             <td>Size</td>
             <td>Date</td>
-            <td style={{ textAlign: "center" }}>Share with</td>
+            <td style={{ textAlign: "center" }}>Shared with</td>
             <td></td>
           </tr>
           {files.map(file => (

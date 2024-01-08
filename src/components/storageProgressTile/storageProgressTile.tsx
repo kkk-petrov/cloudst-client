@@ -2,9 +2,9 @@ import { Wrapper } from '../UI/wrapper/wrapper'
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import "@/styles/progressbar.scss"
-import cl from './storageProgress.module.scss'
+import cl from './storageProgressTile.module.scss'
 
-export const StorageProgress = () => {
+export const StorageProgressTile = () => {
   const total = 500
   const used = 275
   const percentage = Math.round((used / total) * 100)
@@ -17,7 +17,7 @@ export const StorageProgress = () => {
   })
 
   return (
-    <Wrapper style={{ width: "70%" }}>
+    <Wrapper>
       <div className={cl.container}>
         <div style={{ width: size, height: size, margin: "0 auto" }}>
           <CircularProgressbarWithChildren strokeWidth={10} value={percentage} styles={styles}>

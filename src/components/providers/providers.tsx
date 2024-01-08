@@ -7,6 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { FC, ReactNode } from 'react';
 import { IconContext } from 'react-icons';
+import { Container } from '../UI/container/container';
 
 interface Props {
   children: ReactNode
@@ -20,11 +21,12 @@ const Providers: FC<Props> = ({ children, session }) => {
         <NextThemesProvider defaultTheme='dark'>
           <SidebarProvider>
             <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: "30px" }}>
-              {children}
+              <Container>
+                {children}
+              </Container>
             </IconContext.Provider>
           </SidebarProvider>
         </NextThemesProvider>
-
       </AuthProvider>
     </SessionProvider>
   )

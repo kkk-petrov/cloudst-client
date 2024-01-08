@@ -1,6 +1,8 @@
 import { ReactNode } from "react"
 import { FileIcon } from "../fileIcon/fileIcon"
 import cl from './typeCard.module.scss'
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 interface Props {
   type: string
@@ -16,6 +18,8 @@ const enum Colors {
 
 // TODO: file instead of type
 export const TypeCard = ({ type, children }: Props) => {
+  const router = useRouter()
+
   let color
   switch (type.toLowerCase()) {
     case "image":
@@ -32,8 +36,12 @@ export const TypeCard = ({ type, children }: Props) => {
       break;
   }
 
+  const handleClick = () => {
+    router.push("/files?t=" + type)
+  }
+
   return (
-    <li className={cl.card} style={{ background: color + "20" }}>
+    <li className={cl.card} onClick={handleClick} style={{ background: color + "20" }}>
       <FileIcon type={type} />
       <div className={cl.cardInfo}>
         <div style={{ display: "flex", flexDirection: "column" }}>

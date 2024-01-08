@@ -1,14 +1,8 @@
 import { FilesRequest, FilesResponse } from "@/types/requests";
-import { ApiService } from "./apiService";
+import { doRequest } from "@/helpers/doRequest";
 
 
 export class FilesService {
-  private apiService: ApiService<FilesRequest, FilesResponse>;
-
-  constructor(apiService: ApiService<FilesRequest, FilesResponse>) {
-    this.apiService = apiService
-  }
-
   public async getAll(userId: number) {
 
   }
@@ -22,6 +16,14 @@ export class FilesService {
   }
 
   public async update() {
+
+  }
+
+  public async upload() {
+
+  }
+
+  public async download() {
 
   }
 }

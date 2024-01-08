@@ -3,6 +3,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
 import { LoginData } from "@/types";
+import { Awaitable } from "next-auth";
 
 
 export const options: NextAuthOptions = {
@@ -24,8 +25,8 @@ export const options: NextAuthOptions = {
           type: "password",
         }
       },
-      async authorize(credentials) {
-        return await authService.login(credentials as LoginData);
+      async authorize(credentials): Promise<Awaitable<any>> {
+        return authService.login(credentials as LoginData);
       }
     })
 

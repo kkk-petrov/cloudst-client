@@ -2,19 +2,21 @@
 
 import '@/styles/globals.scss'
 import cl from './dashboard.module.scss'
-import { PinnedFiles } from '@/components/pinnedFiles/pinnedFiles'
-import { TypeFilter } from '@/components/typeFilter/typeFilter'
-import { StorageProgress } from '@/components/storageProgress/storageProgress'
 import { files } from '@/dummy'
 import { FileTable } from '@/components/fileTable/fileTable'
+import { TypeFilterTile } from '@/components/typeFilterTile/typeFilterTile'
+import { PinnedFilesTile } from '@/components/pinnedFilesTile/pinnedFilesTile'
+import { StorageProgressTile } from '@/components/storageProgressTile/storageProgressTile'
+import { SettingsTile } from '@/components/settingsTile/settingsTile'
 
 export default function Dashboard() {
   return (
     <div className={cl.container}>
       <div className={cl.wrapper}>
-        <TypeFilter />
-        <PinnedFiles />
-        <StorageProgress />
+        <TypeFilterTile />
+        <PinnedFilesTile />
+        <StorageProgressTile />
+        <SettingsTile />
       </div>
       <FileTable title="Recent Files" files={files} />
     </div >

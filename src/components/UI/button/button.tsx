@@ -1,11 +1,14 @@
-import { FC, HTMLAttributes, PropsWithChildren } from "react"
+import { FC, HTMLAttributes, PropsWithChildren, ReactNode } from "react"
 import cl from "@/components/UI/button/button.module.scss"
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> { }
+interface Props extends HTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+  type?: "button" | "submit" | "reset"
+}
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, ...props }) => {
+export const Button = ({ children, type, ...props }: Props) => {
 
   return (
-    <button {...props} className={cl.button}>{children}</button>
+    <button type={type} {...props} className={cl.button}>{children}</button>
   )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
-import cl from './typeFilter.module.scss'
+import cl from './typeFilterTile.module.scss'
 import { Wrapper } from '../UI/wrapper/wrapper'
 import { TypeCard } from '../typeCard/typeCard'
 
-export const TypeFilter = () => {
+export const TypeFilterTile = () => {
   return (
     <Wrapper>
       <ul className={cl.typeList}>
         <TypeCard type="image">
-          Image
+          Images
         </TypeCard>
         <TypeCard type="video">
           Video

@@ -14,6 +14,8 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { SearchInput } from "../searchInput/searchInput"
 import { useSidebar } from "@/hooks/useSidebar"
+import { getAxiosInstance } from "@/helpers/getAxiosInstance"
+import { UploadFileForm } from "../uploadFileForm/uploadFileForm"
 
 export const Topbar = () => {
   const [isModalActive, setIsModalActive] = useState(false)
@@ -23,6 +25,18 @@ export const Topbar = () => {
   const data = session.data?.user as { token: string, user: UserModel }
   const user = data?.user
   const userAvatarUrl = user?.avatar || "/user.png"
+
+  const handleClick = async () => {
+    const axiosInstance = await getAxiosInstance()
+    if (axiosInstance !== null) {
+      const res = await axiosInstance.get('/users')
+      console.log(res.data)
+
+    }
+
+    return null
+
+  }
 
   return (
     <div className={cl.container}>
@@ -36,7 +50,7 @@ export const Topbar = () => {
         </div>
 
         {/* TODO: notifications */}
-        <button className={cl.notifications}>
+        <button onClick={handleClick} className={cl.notifications}>
           <GoBellFill size="25px" />
         </button>
 
@@ -55,7 +69,7 @@ export const Topbar = () => {
           </Link>
         </div>
 
-        <Modal isSidebarHidden={isSidebarHidden} isActive={isModalActive} setIsActive={setIsModalActive}></Modal>
+        <UploadFileForm isActive={isModalActive} setIsActive={setIsModalActive}></UploadFileForm>
       </div>
 
     </div>

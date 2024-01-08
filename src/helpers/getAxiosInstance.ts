@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { getSession } from "next-auth/react";
 
-export const getAxiosInstance = async () => {
+export async function getAxiosInstance() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   if (!API_URL) {
     throw new Error("API_URL is not defined.");

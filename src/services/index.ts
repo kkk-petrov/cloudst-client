@@ -1,8 +1,8 @@
-import { AuthRequest, AuthResponse } from "@/types/requests";
-import { ApiService } from "./apiService";
 import { AuthService } from "./authService";
+import { FilesService } from "./filesService";
 
-const apiService = new ApiService<AuthRequest, AuthResponse>();
-const authService = new AuthService(apiService);
+const authService = new AuthService();
+const filesService = new FilesService();
 
-export { authService };
+export { authService, filesService };
+

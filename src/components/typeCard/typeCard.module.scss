@@ -1,15 +1,16 @@
 @import "@/styles/_colors.scss";
 
 .card {
-  display: flex;
-  flex-direction: column;
   width: calc(50% - 10px);
   height: calc(50% - 10px);
-  gap: 10px;
-  justify-content: space-between;
-  padding: 10px;
   border-radius: 10px;
   transition: all 200ms ease;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
 
   &:nth-child(-n+2) {
     margin-bottom: 10px;
@@ -18,7 +19,9 @@
   &Info {
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
+    flex-wrap: nowrap;
     font-size: 14px;
     color: $text-ltgray;
     font-weight: 400;
@@ -28,6 +31,7 @@
       color: $text-gray;
       font-weight: 600;
       transition: all 200ms ease;
+      display: inline-block;
 
       span {
         margin-top: 5px;
@@ -37,6 +41,7 @@
       }
     }
   }
+
 }
 
 [data-theme="dark"] {

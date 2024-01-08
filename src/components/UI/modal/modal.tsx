@@ -1,21 +1,21 @@
-"use client"
-
-import { FC, Dispatch, SetStateAction, PropsWithChildren } from "react"
+import { Dispatch, SetStateAction, ReactNode } from "react"
 import cl from "./modal.module.scss"
+import { useSidebar } from "@/hooks/useSidebar"
 
-interface ModalProps {
-  isSidebarHidden: boolean
+interface Props {
   isActive: boolean
   setIsActive: Dispatch<SetStateAction<boolean>>
+  children: ReactNode
 }
 
-export const Modal: FC<PropsWithChildren<ModalProps>> = ({ ...props }) => {
-  const className = `${cl.wrapper} ${props.isActive ? cl.active : ''} ${props.isSidebarHidden ? cl.full : ''}`
+export const Modal = ({ isActive, children, setIsActive }: Props) => {
+  const { isSidebarHidden } = useSidebar()
+  const className = `${cl.wrapper} ${isActive ? cl.active : ''} ${isSidebarHidden ? cl.full : ''}`
 
   return (
-    <div className={className} onClick={() => props.setIsActive(false)}>
+    <div className={className} onClick={() => setIsActive(false)}>
       <div onClick={e => e.stopPropagation()} className={cl.modal}>
-        {props.children}
+        {children}
       </div>
     </div>
   )
