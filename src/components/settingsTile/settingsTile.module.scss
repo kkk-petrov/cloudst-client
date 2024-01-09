@@ -13,13 +13,11 @@
 
   .icon {
     transition: all 200ms ease;
-    filter: drop-shadow(0 0 20px rgba($text-ltgray, .8));
     color: $accent;
 
-    &:hover {
-      filter: drop-shadow(0 0 30px rgba($text-ltgray, 1));
-      // animation: spin 600ms ease;
-    }
+    // &:hover {
+    //   animation: spin 600ms ease;
+    // }
   }
 
 
@@ -28,6 +26,7 @@
 [data-theme="dark"] {
   .icon {
     color: $text-ltgray;
+    filter: drop-shadow(0 0 20px rgba($text-ltgray, .8));
   }
 }
 

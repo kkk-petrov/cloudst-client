@@ -1,5 +1,4 @@
 import { FilesRequest, FilesResponse } from "@/types/requests";
-import { doRequest } from "@/helpers/doRequest";
 
 
 export class FilesService {

@@ -6,35 +6,26 @@ import { Button } from "../UI/button/button"
 import { IoMdCloudDownload } from "react-icons/io"
 import ThemeToggler from "../themeToggler/themeToggler"
 import { useState } from "react"
-import { Modal } from "../UI/modal/modal"
 import { GoBellFill } from "react-icons/go"
 import Image from "next/image"
 import { UserModel } from "@/types"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { SearchInput } from "../searchInput/searchInput"
-import { useSidebar } from "@/hooks/useSidebar"
-import { getAxiosInstance } from "@/helpers/getAxiosInstance"
 import { UploadFileForm } from "../uploadFileForm/uploadFileForm"
+import { doRequest } from "@/infrastructure/api/doRequest"
 
 export const Topbar = () => {
   const [isModalActive, setIsModalActive] = useState(false)
   const session = useSession()
-  const { isSidebarHidden } = useSidebar()
 
   const data = session.data?.user as { token: string, user: UserModel }
   const user = data?.user
   const userAvatarUrl = user?.avatar || "/user.png"
 
   const handleClick = async () => {
-    const axiosInstance = await getAxiosInstance()
-    if (axiosInstance !== null) {
-      const res = await axiosInstance.get('/users')
-      console.log(res.data)
-
-    }
-
-    return null
+    const res = await doRequest("GET", '/users')
+    console.log(res)
 
   }
 
