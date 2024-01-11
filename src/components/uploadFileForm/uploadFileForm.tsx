@@ -2,6 +2,8 @@ import { ChangeEvent, Dispatch, DragEvent, FormEvent, SetStateAction, useCallbac
 import { Modal } from "../UI/modal/modal"
 import cl from "./uploadFileForm.module.scss"
 import { Button } from "../UI/button/button"
+import { Wrapper } from "../UI/wrapper/wrapper"
+import { useDrag } from "@/hooks/useDrag"
 
 interface Props {
   isActive: boolean
@@ -11,6 +13,7 @@ interface Props {
 export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isFileDragged, setIsFileDragged] = useState(false)
+  const { handleDragOver, handleDragLeave } = useDrag()
 
   const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -19,7 +22,7 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
     }
   }, []);
 
-  const handleDrop = useCallback((e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = useCallback((e: DragEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const files = e.dataTransfer.files;
@@ -28,10 +31,10 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
     }
   }, []);
 
-  const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsFileDragged(true)
-  }, []);
+  // const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  //   setIsFileDragged(true)
+  // }, []);
 
   const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
@@ -42,13 +45,20 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
 
   return (
     <Modal isActive={isActive} setIsActive={setIsActive}>
-      <form className={cl.form} onSubmit={handleSubmit}>
+      <form
+        className={cl.form}
+        onSubmit={handleSubmit}
+        onDrop={handleDrop}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+      >
         <div className={`${cl.wrapper} ${isFileDragged ? cl.drag : ""}`}
-          onDrop={handleDrop}
-          onDragLeave={() => setIsFileDragged(false)}
-          onDragOver={handleDragOver}
         >
           <input className={cl.input} type="file" onChange={handleFileChange} multiple />
+          <div>
+            Drag and drop files here
+
+          </div>
 
           <ul className={cl.list}>
             {selectedFiles.map((file) => (

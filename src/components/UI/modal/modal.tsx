@@ -9,11 +9,10 @@ interface Props {
 }
 
 export const Modal = ({ isActive, children, setIsActive }: Props) => {
-  const { isSidebarHidden } = useSidebar()
-  const className = `${cl.wrapper} ${isActive ? cl.active : ''} ${isSidebarHidden ? cl.full : ''}`
+  const classes = `${cl.wrapper} ${isActive ? cl.active : ''}`
 
   return (
-    <div className={className} onClick={() => setIsActive(false)}>
+    <div className={classes} onClick={() => setIsActive(false)}>
       <div onClick={e => e.stopPropagation()} className={cl.modal}>
         {children}
       </div>

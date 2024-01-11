@@ -8,7 +8,7 @@ export const files: FileModel[] = [
     size: 8.8,
     type: "Audio",
     originalName: "song.mp3",
-    createdAt: "Jan 02, 2024"
+    updatedAt: "Jan 01, 2024, 14:37"
   },
   {
     id: 2,
@@ -16,40 +16,40 @@ export const files: FileModel[] = [
     size: 5.3,
     type: "Audio",
     originalName: "12214231.wav",
-    createdAt: "Dec 29, 2023"
+    updatedAt: "Dec 29, 2023, 09:22"
   },
   {
     id: 3,
     desc: "desc",
     size: 123,
-    type: "File",
+    type: "Document",
     originalName: "book.pdf",
-    createdAt: "Dec 06, 2023",
+    updatedAt: "Dec 06, 2023, 23:12",
     sharedWith: [1, 2]
   },
   {
     id: 4,
     desc: "desc",
     size: 1223,
-    type: "video",
+    type: "Video",
     originalName: "movie.mp4",
-    createdAt: "Nov 15, 2023"
+    updatedAt: "Nov 15, 2023, 10:00"
   },
   {
     id: 5,
     desc: "desc",
     size: 1.1,
-    type: "image",
+    type: "Image",
     originalName: "wallpaper.jpeg",
-    createdAt: "Nov 06, 2023"
+    updatedAt: "Nov 03, 2023, 03:40"
   },
   {
     id: 6,
     desc: "file",
     size: 0.8,
-    type: "unknown",
+    type: "Document",
     originalName: "file",
-    createdAt: "Nov 01, 2023"
+    updatedAt: "Oct 03, 2023, 12:04"
   },
 ]
 

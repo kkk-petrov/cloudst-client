@@ -7,6 +7,8 @@ import { FileIcon } from "../fileIcon/fileIcon"
 import { HiDotsHorizontal } from "react-icons/hi";
 import { users } from "@/dummy"
 import { Navigate } from "../UI/navigate/navigate"
+import { Checkbox } from "../UI/checkbox/checkbox"
+import { FaCaretDown } from "react-icons/fa"
 
 interface Props {
   title: string
@@ -24,17 +26,21 @@ export const FileTable = ({ title, files }: Props) => {
         </div>
         <table className={cl.table}>
           <tr style={{ color: "#626366" }}>
-            <td>Name</td>
-            <td>Size</td>
-            <td>Date</td>
+            {/* <td><Checkbox /></td> */}
+            <td className={cl.head}>Name <FaCaretDown style={{ verticalAlign: "top" }} size={20} className={cl.sort} /></td>
+            <td className={cl.head}>Type <FaCaretDown style={{ verticalAlign: "top" }} size={20} className={cl.sort} /></td>
+            <td className={cl.head}>Size <FaCaretDown style={{ verticalAlign: "top" }} size={20} className={cl.sort} /></td>
+            <td className={cl.head}>Last modified <FaCaretDown style={{ verticalAlign: "top" }} size={20} className={`${cl.sort} ${cl.active}`} /></td>
             <td style={{ textAlign: "center" }}>Shared with</td>
             <td></td>
           </tr>
           {files.map(file => (
             <tr key={file.id}>
+              {/* <td><Checkbox /></td> */}
               <td><FileIcon type={file.type} size={40} style={{ marginRight: "15px" }} />{file.originalName}</td>
+              <td>{file.type}</td>
               <td>{file.size >= 1000 ? `${(file.size / 1000).toFixed(1)} GB` : `${file.size} MB`}</td>
-              <td>{file.createdAt}</td>
+              <td>{file.updatedAt}</td>
               <td style={{ textAlign: "center" }}>
                 {
                   file.sharedWith
@@ -48,7 +54,7 @@ export const FileTable = ({ title, files }: Props) => {
                         key={user.id}
                       />
                     ))
-                    : "Only You"
+                    : "Only you"
                 }
               </td>
               <td><HiDotsHorizontal className={cl.icon} size={26} /></td>

@@ -8,6 +8,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { FC, ReactNode } from 'react';
 import { IconContext } from 'react-icons';
 import { Container } from '../UI/container/container';
+import { DragProvider } from '@/context/dragContext';
 
 interface Props {
   children: ReactNode
@@ -22,7 +23,9 @@ const Providers: FC<Props> = ({ children, session }) => {
           <SidebarProvider>
             <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: "30px" }}>
               <Container>
-                {children}
+                <DragProvider>
+                  {children}
+                </DragProvider>
               </Container>
             </IconContext.Provider>
           </SidebarProvider>

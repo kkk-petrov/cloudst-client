@@ -1,6 +1,5 @@
 @import "_colors";
 
-
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -112,3 +111,10 @@ a {
   font-weight: 700;
   font-size: 20px;
 }
+
+// input[type="checkbox"] {
+//   width: 1.5em;
+//   height: 1.5em;
+//   margin-right: 0.65rem;
+//   accent-color: $accent;
+// }

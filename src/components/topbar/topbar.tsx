@@ -14,9 +14,11 @@ import Link from "next/link"
 import { SearchInput } from "../searchInput/searchInput"
 import { UploadFileForm } from "../uploadFileForm/uploadFileForm"
 import { doRequest } from "@/infrastructure/api/doRequest"
+import { useDrag } from "@/hooks/useDrag"
 
 export const Topbar = () => {
-  const [isModalActive, setIsModalActive] = useState(false)
+  // const [isModalActive, setIsModalActive] = useState(false)
+  const { setIsActive } = useDrag()
   const session = useSession()
 
   const data = session.data?.user as { token: string, user: UserModel }
@@ -46,7 +48,7 @@ export const Topbar = () => {
         </button>
 
         {/* TODO: uploading form */}
-        <Button onClick={() => setIsModalActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
+        <Button onClick={() => setIsActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
           <IoMdCloudDownload className={cl.uploadIcon} />
           Upload
         </Button>
@@ -60,7 +62,7 @@ export const Topbar = () => {
           </Link>
         </div>
 
-        <UploadFileForm isActive={isModalActive} setIsActive={setIsModalActive}></UploadFileForm>
+        {/* <UploadFileForm isActive={isModalActive} setIsActive={setIsModalActive}></UploadFileForm> */}
       </div>
 
     </div>

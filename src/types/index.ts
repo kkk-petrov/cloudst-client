@@ -21,7 +21,8 @@ export interface FileModel {
   size: number
   folderId?: FolderID
   ownerId?: UserID
-  createdAt: string
+  createdAt?: string
+  updatedAt: string
   sharedWith?: UserID[]
 }
 

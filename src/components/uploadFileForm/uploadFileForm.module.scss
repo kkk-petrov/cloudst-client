@@ -8,13 +8,16 @@
   justify-content: space-between;
 
   .wrapper {
-    width: 500px;
-    height: 500px;
+    width: 60rem;
+    height: 40rem;
     padding: 20px;
     border: dashed 1px $gray;
     border-radius: 10px;
     transition: all 200ms ease;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &.drag {
       border: dashed 1px $accent;
@@ -25,6 +28,8 @@
       display: none;
 
     }
+
+    div {}
 
     .list {
 
