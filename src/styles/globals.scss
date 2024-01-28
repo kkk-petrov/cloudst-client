@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "_colors";
 
 :root {
@@ -80,7 +81,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: var(--font-inter);
+  font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -111,10 +112,3 @@ a {
   font-weight: 700;
   font-size: 20px;
 }
-
-// input[type="checkbox"] {
-//   width: 1.5em;
-//   height: 1.5em;
-//   margin-right: 0.65rem;
-//   accent-color: $accent;
-// }

@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from "react"
-import cl from "@/components/UI/button/Button.module.scss"
+import cl from "./Button.module.scss"
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode

@@ -1,6 +1,6 @@
 import { FileModel } from "@/types"
 import { Wrapper } from "../UI/Wrapper/Wrapper"
-import cl from "./FileTable.module.scss"
+import cl from "./TableTile.module.scss"
 import { FileIcon } from "../FileIcon/FileIcon"
 import { HiDotsHorizontal } from "react-icons/hi";
 import { users } from "@/dummy"

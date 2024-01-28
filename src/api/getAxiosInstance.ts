@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addTokenInterceptor } from "./interceptors/tokenInterceptor";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = "http://localhost:6969/"
 
 export async function getAxiosInstance() {
   if (!API_URL) throw new Error("API_URL is not defined.");

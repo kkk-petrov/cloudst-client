@@ -26,7 +26,7 @@ export const Sidebar = () => {
   ]
 
   return (
-    <div className={`${cl.container} ${isSidebarHidden && cl.hidden}`}>
+    <div className={`${cl.container} ${isSidebarHidden ? cl.hidden : ""}`}>
       <div className={`${cl.wrapper} ${isWrapperHovered && !isSidebarHidden ? cl.wrapperActive : ""}`} />
       <div className={cl.logoContainer}>
         <Logo />

@@ -14,9 +14,19 @@ export const Topbar = () => {
   const { setIsActive } = useDrag()
   // const session = useSession()
 
-  const data = session.data?.user as { token: string, user: UserModel }
+  // const data = session.data?.user as { token: string, user: UserModel }
+  const data: { token: string, user: Pick<UserModel, "name" | "email" | "id" | "avatar"> } = {
+    token: "token",
+    user: {
+      id: 1,
+      name: "user",
+      email: "email",
+      avatar: ""
+    }
+
+  }
   const user = data?.user
-  const userAvatarUrl = user?.avatar || "/user.png"
+  const userAvatarUrl = user?.avatar !== "" ? user.avatar : "/user.png"
 
   const handleClick = async () => {
     const res = await doRequest("GET", '/users')

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, SetStateAction, FC, PropsWithChildren, Dispatch } from 'react';
+import { createContext, useState, useEffect, SetStateAction, Dispatch, ReactNode } from 'react';
 
 interface SidebarContextProps {
   isSidebarHidden: boolean;
@@ -10,16 +10,18 @@ export const SidebarContext = createContext<SidebarContextProps>({
   setIsSidebarHidden: () => { },
 });
 
-export const SidebarProvider: FC<PropsWithChildren> = ({ children }) => {
+interface SidebarProviderProps {
+  children: ReactNode
+}
+
+export const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedValue = window.localStorage.getItem('isSidebarHidden');
-      return storedValue ? JSON.parse(storedValue) : false;
-    }
+    const storedValue = localStorage.getItem('isSidebarHidden');
+    return storedValue ? JSON.parse(storedValue) : false;
   });
 
   useEffect(() => {
-    window.localStorage.setItem('isSidebarHidden', JSON.stringify(isSidebarHidden));
+    localStorage.setItem('isSidebarHidden', JSON.stringify(isSidebarHidden));
   }, [isSidebarHidden]);
 
   return (

@@ -1,17 +1,17 @@
 import { AxiosInstance } from "axios";
-import { getSession } from "next-auth/react";
 
 export const addTokenInterceptor = async (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.request.use(async (config) => {
     try {
-      const session = await getSession();
 
       let token: string | null = null
-      if (session && session.user) {
-        token = (session.user as { token: string }).token;
 
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+      // if (session && session.user) {
+      //   token = (session.user as { token: string }).token;
+      // }
+
+      token = "token"
+      config.headers.Authorization = `Bearer ${token}`;
 
       return config;
     } catch (error) {
