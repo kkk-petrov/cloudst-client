@@ -4,6 +4,7 @@ import cl from "./uploadFileForm.module.scss"
 import { Button } from "../UI/button/button"
 import { Wrapper } from "../UI/wrapper/wrapper"
 import { useDrag } from "@/hooks/useDrag"
+import Dropzone from "react-dropzone"
 
 interface Props {
   isActive: boolean
@@ -44,7 +45,7 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
   }, [selectedFiles, setIsActive]);
 
   return (
-    <Modal isActive={isActive} setIsActive={setIsActive}>
+    <Modal style={{ pointerEvents: "none" }} isActive={isActive} setIsActive={setIsActive}>
       <form
         className={cl.form}
         onSubmit={handleSubmit}
@@ -52,12 +53,11 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
       >
-        <div className={`${cl.wrapper} ${isFileDragged ? cl.drag : ""}`}
-        >
+
+        <div className={`${cl.wrapper} ${isFileDragged ? cl.drag : ""}`}>
           <input className={cl.input} type="file" onChange={handleFileChange} multiple />
           <div>
             Drag and drop files here
-
           </div>
 
           <ul className={cl.list}>
@@ -67,6 +67,7 @@ export const UploadFileForm = ({ isActive, setIsActive }: Props) => {
           </ul>
         </div>
         <Button type="submit">Upload</Button>
+
       </form>
     </Modal>
   )

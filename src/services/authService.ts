@@ -1,4 +1,4 @@
-import { doRequest } from "@/infrastructure/api/doRequest";
+import { doRequest } from "@/api/doRequest";
 import { LoginData, RegisterData } from "@/types";
 import { AuthRequest, AuthResponse } from "@/types/requests";
 

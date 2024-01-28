@@ -10,15 +10,6 @@ interface Props {
 export const DragContainer = ({ children }: Props) => {
   const { isActive, setIsActive, handleDragOver, handleDragLeave } = useDrag()
 
-  // const handleDragOver = useCallback(() => {
-  //   setIsActive(true)
-  // }, [])
-  //
-  // const handleDragLeave = useCallback(() => {
-  //   setIsActive(false)
-  // }, [])
-
-
   return (
     <div className={cl.container} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
       {children}

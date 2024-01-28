@@ -1,43 +1,35 @@
 "use client"
 
-import { useEffect, useContext, createContext, useState, ReactNode } from 'react';
+import { useEffect, useContext, createContext, useState, ReactNode, useMemo } from 'react';
 import { getSession } from 'next-auth/react';
 
 interface AuthContextProps {
-  isAuthenticated: boolean | null;
-  isSessionChecked: boolean
+  authContextValue: {
+    isAuthenticated: boolean | null,
+    isSessionChecked: boolean | null,
+  }
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  isAuthenticated: null,
-  isSessionChecked: false,
+  authContextValue: {
+    isAuthenticated: null,
+    isSessionChecked: false,
+  }
 });
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+interface ProviderProps {
+  children: ReactNode
+}
+
+export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [isSessionChecked, setIsSessionChecked] = useState<boolean>(false);
+  const [isSessionChecked, setIsSessionChecked] = useState<boolean | null>(false);
 
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const storedSession = localStorage.getItem('session');
-        const storedTimestamp = localStorage.getItem('sessionTimestamp');
-
-        if (storedSession && storedTimestamp) {
-          const expirationTime = 60 * 1 * 1000;
-          const currentTime = new Date().getTime();
-
-          if (currentTime - parseInt(storedTimestamp) < expirationTime) {
-            setIsAuthenticated(true);
-            return;
-          } 
-        }
-
         const session = await getSession();
         setIsAuthenticated(!!session);
-
-        localStorage.setItem('session', JSON.stringify(session));
-        localStorage.setItem('sessionTimestamp', new Date().getTime().toString());
       } catch (err) {
         console.error(err);
       } finally {
@@ -48,10 +40,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkSession();
   }, []);
 
+  const authContextValue = useMemo(() => ({ isAuthenticated, isSessionChecked }), [isAuthenticated, isSessionChecked]);
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isSessionChecked }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 };
-

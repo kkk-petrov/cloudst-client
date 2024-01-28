@@ -6,6 +6,9 @@ import { Topbar } from '@/components/topbar/topbar'
 import Providers from '@/components/providers/providers'
 import { getServerSession } from 'next-auth'
 import { Protected } from '@/components/protected/protected'
+import { Suspense } from 'react'
+import Loading from './loading'
+import { Loader } from '@/components/loader/loader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,15 +27,13 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers session={session}>
-          <Protected>
 
-            <Sidebar />
-            <main className="main">
-              <Topbar />
-              {children}
-            </main>
+          <Sidebar />
+          <main className="main">
+            <Topbar />
+            {children}
+          </main>
 
-          </Protected>
         </Providers>
       </body>
     </html>

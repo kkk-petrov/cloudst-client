@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction, ReactNode } from "react"
 import cl from "./modal.module.scss"
 import { useSidebar } from "@/hooks/useSidebar"
+import { HTMLAttributes } from "react"
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   isActive: boolean
   setIsActive: Dispatch<SetStateAction<boolean>>
   children: ReactNode

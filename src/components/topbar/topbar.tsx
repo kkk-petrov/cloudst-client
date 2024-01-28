@@ -13,11 +13,10 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { SearchInput } from "../searchInput/searchInput"
 import { UploadFileForm } from "../uploadFileForm/uploadFileForm"
-import { doRequest } from "@/infrastructure/api/doRequest"
+import { doRequest } from "@/api/doRequest"
 import { useDrag } from "@/hooks/useDrag"
 
 export const Topbar = () => {
-  // const [isModalActive, setIsModalActive] = useState(false)
   const { setIsActive } = useDrag()
   const session = useSession()
 
@@ -28,7 +27,6 @@ export const Topbar = () => {
   const handleClick = async () => {
     const res = await doRequest("GET", '/users')
     console.log(res)
-
   }
 
   return (
