@@ -1,0 +1,13 @@
+.mainContainer {
+  max-width: 100vw;
+  max-height: 100svh;
+  display: inherit;
+  margin: 0 auto;
+}
+
+@media (width > 1920) {
+
+  .mainContainer {
+    max-width: 1920px;
+  }
+}

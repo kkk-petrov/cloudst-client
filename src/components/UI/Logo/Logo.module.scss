@@ -1,0 +1,47 @@
+@import "@/styles/_colors.scss";
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 800;
+  background: none;
+  transition: all 300ms ease;
+  overflow: hidden;
+  color: $accent;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+
+
+  &Icon {
+
+    &Wrapper {
+
+      &::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        position: absolute;
+        top: 1%;
+        left: 13%;
+        background: #FDBA2D;
+        z-index: -1;
+        opacity: 1;
+        transition: all 200ms ease;
+      }
+    }
+  }
+
+
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 15px;
+  }
+}
+
+// [data-theme="dark"]{
+//
+// }

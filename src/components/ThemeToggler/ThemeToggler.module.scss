@@ -1,0 +1,53 @@
+@import "@/styles/_colors.scss";
+
+.toggler {
+  display: flex;
+  align-items: center;
+
+
+  background: transparent;
+  transition: all 300ms ease;
+  box-shadow: $ltgray 0px 0px 5px;
+  border-radius: 20px;
+  padding: 5px;
+  height: 100%;
+  width: 60px;
+  cursor: pointer;
+  border: 1px solid $accent;
+  outline: none;
+
+  &:hover {
+    filter: brightness(110%);
+  }
+
+  .dark,
+  .light {
+    padding: 10px;
+    border-radius: 100%;
+    transition: all 300ms ease;
+    height: 100%;
+    background: $accent;
+  }
+
+  .dark {
+    margin-left: 60%;
+  }
+
+  .light {
+    margin-left: 0%;
+  }
+}
+
+[data-theme="dark"] {
+  .toggler {
+
+    background: $gray;
+    box-shadow: none;
+    border-color: transparent;
+
+    .dark,
+    .light {
+      background: $text-ltgray;
+    }
+  }
+}
