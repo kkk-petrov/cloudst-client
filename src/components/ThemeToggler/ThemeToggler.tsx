@@ -1,32 +1,45 @@
+import { useEffect, useState } from 'react'
 import cl from "./ThemeToggler.module.scss"
-import { useState, useEffect } from 'react'
 
 const ThemeToggler = () => {
-  const [mounted, setMounted] = useState(false)
-  const [theme, setTheme] = useState("dark" || "light")
+  const storedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  const defaultDark = storedTheme === "dark" || (storedTheme === null && prefersDark);
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const [theme, setTheme] = useState(defaultDark ? "dark" : "light");
 
-  if (!mounted) {
-    return null
+  const setDark = () => {
+    localStorage.setItem("theme", "dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+    setTheme("dark");
+  }
+
+  const setLight = () => {
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+    setTheme("light");
   }
 
   const toggleTheme = () => {
-    console.log(theme)
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    console.log(newTheme)
-    setTheme(newTheme)
-  }
+    if (theme === "dark") {
+      setLight();
+    } else {
+      setDark();
+    }
+  };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    if (defaultDark) {
+      setDark();
+    }
+  }, [defaultDark]);
 
   return (
     <button className={cl.toggler} onClick={toggleTheme}>
-      <div className={theme === "dark" ? cl.dark : cl.light}>
-      </div>
+      <div className={theme === "dark" ? cl.dark : cl.light} />
     </button>
-  )
+  );
 }
 
-export default ThemeToggler
+export default ThemeToggler;
