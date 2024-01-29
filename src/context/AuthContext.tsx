@@ -1,17 +1,13 @@
 import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 
 interface AuthContextProps {
-  authContextValue: {
-    isAuthenticated: boolean | null,
-    isSessionChecked: boolean | null,
-  }
+  isAuthenticated: boolean | null,
+  isSessionChecked: boolean | null,
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  authContextValue: {
-    isAuthenticated: null,
-    isSessionChecked: false,
-  }
+  isAuthenticated: null,
+  isSessionChecked: false,
 });
 
 interface ProviderProps {
@@ -44,6 +40,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   return (
     <AuthContext.Provider value={authContextValue}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider >
   );
 };

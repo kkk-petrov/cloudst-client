@@ -4,29 +4,19 @@ import { Button } from "../UI/Button/Button"
 import { IoMdCloudDownload } from "react-icons/io"
 import ThemeToggler from "../ThemeToggler/ThemeToggler"
 import { GoBellFill } from "react-icons/go"
-import { UserModel } from "@/types"
 import { SearchInput } from "../Search/Search"
 import { doRequest } from "@/api/doRequest"
 import { useDrag } from "@/hooks/useDrag"
 import { Link } from "react-router-dom"
+import { UserModel } from "@/types"
 
-export const Topbar = () => {
+interface Props {
+  user: UserModel | null
+}
+
+export const Topbar = ({ user }: Props) => {
   const { setIsActive } = useDrag()
-  // const session = useSession()
-
-  // const data = session.data?.user as { token: string, user: UserModel }
-  const data: { token: string, user: Pick<UserModel, "name" | "email" | "id" | "avatar"> } = {
-    token: "token",
-    user: {
-      id: 1,
-      name: "user",
-      email: "email",
-      avatar: ""
-    }
-
-  }
-  const user = data?.user
-  const userAvatarUrl = user?.avatar !== "" ? user.avatar : "/user.png"
+  const userAvatarUrl = user?.avatar !== "" ? user?.avatar : "/user.png"
 
   const handleClick = async () => {
     const res = await doRequest("GET", '/users')
@@ -58,7 +48,7 @@ export const Topbar = () => {
         {/* TODO: user menu */}
         <div className={cl.user}>
           <img alt="avatar" src={userAvatarUrl} height={30} width={30} className={cl.userAvatar} />
-          <Link to="api/auth/signout" className={cl.userButton}>
+          <Link to="auth/logout" className={cl.userButton}>
             <span className={cl.userName}>{user?.name}</span>
             <FaAngleDown className={cl.userButtonIcon} size="15px" />
           </Link>

@@ -18,6 +18,6 @@ export async function doRequest<T, U>(
 
     return resData
   } catch (error) {
-    throw new Error('Error during request: ' + error)
+    throw new Error(`Error during request: ${error}`)
   }
 }
