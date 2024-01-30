@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { UserModel } from '@/types';
 import { useAuthStore } from '@/store/store';
 import { doRequest } from '@/api/doRequest';
+import { DragContainer } from '../UploadFiles/DragContainer';
 
 export const Layout = () => {
   const [user, setUser] = useState<UserModel | null>(null)
@@ -18,7 +19,9 @@ export const Layout = () => {
       console.log(user)
     }
 
-    fetchUser()
+    if (store.token) {
+      fetchUser()
+    }
   }, [store])
 
   return (
@@ -28,6 +31,7 @@ export const Layout = () => {
         <Topbar user={user} />
         <Outlet />
       </main>
+      {/* <DragContainer /> */}
     </div>
   )
 }

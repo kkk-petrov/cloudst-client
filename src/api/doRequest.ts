@@ -13,10 +13,11 @@ export async function doRequest<T, U>(
       method: method,
       url: url,
       data: data
-    });
-    const resData = res.data;
+    }).then(res => res.data);
 
-    return resData
+    // const resData = res.data;
+
+    return { status: "OK", ...res }
   } catch (error) {
     throw new Error(`Error during request: ${error}`)
   }

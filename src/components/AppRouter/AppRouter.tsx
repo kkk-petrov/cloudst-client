@@ -9,62 +9,55 @@ import { Login } from "@/pages/Auth/Login/Login"
 import { Shared } from "@/pages/Shared/Shared"
 import { useAuthStore } from "@/store/store"
 import { Logout } from "@/pages/Auth/Logout/Logout"
+import { Loader } from "../UI/Loader/Loader"
+import { Protected } from "../Protected/Protected"
 
 export const AppRouter = () => {
   const store = useAuthStore(store => store);
 
-  const defineRoutes = () => {
-    const authenticatedRoutes = [
-      {
-        element: <Layout />,
-        children: [
-          {
-            path: "/",
-            element: <Dashboard />,
-          },
-          {
-            path: "/recent",
-            element: <Recent />,
-          },
-          {
-            path: "/favorites",
-            element: <Favorites />,
-          },
-          {
-            path: "/trash",
-            element: <Trash />,
-          },
-          {
-            path: "/shared",
-            element: <Shared />,
-          },
-        ]
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-      {
-        path: "/auth/logout",
-        element: <Logout />,
-      },
-    ];
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Protected><Dashboard /></Protected>,
+        },
+        {
+          path: "/recent",
+          element: <Protected><Recent /></Protected>,
+        },
+        {
+          path: "/favorites",
+          element: <Protected><Favorites /></Protected>,
+        },
+        {
+          path: "/trash",
+          element: <Protected><Trash /></Protected>,
+        },
+        {
+          path: "/shared",
+          element: <Protected><Shared /></Protected>,
+        },
+      ],
+    },
+    {
+      path: "/auth/logout",
+      element: <Protected><Logout /></Protected>,
+    },
+    {
+      path: "/settings",
+      element: <Protected><Settings /></Protected>,
+    },
+    {
+      path: "/auth/login",
+      element: store.token ? <Navigate to="/" /> : <Login />,
+    },
+  ]);
 
-    const unauthenticatedRoutes = [
-      {
-        path: "/auth/login",
-        element: <Login />,
-      },
-      {
-        path: "*",
-        element: <Navigate to="/auth/login" replace />,
-      },
-    ];
-
-    return store.userId ? authenticatedRoutes : unauthenticatedRoutes;
-  };
-
-  const router = createBrowserRouter(defineRoutes());
+  if (store.isLoading) {
+    return <Loader />
+  }
 
   return <RouterProvider router={router} />;
 };

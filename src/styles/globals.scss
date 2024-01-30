@@ -88,15 +88,18 @@ body {
   transition: all 300ms ease;
 }
 
-[data-theme='dark'] .main {
-  background: $background-darker;
-  color: $text-ltgray;
-}
-
-
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .main {
@@ -108,11 +111,7 @@ a {
   width: 100vw;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-
-  font-weight: 700;
-  font-size: 20px;
+[data-theme='dark'] .main {
+  background: $background-darker;
+  color: $text-ltgray;
 }

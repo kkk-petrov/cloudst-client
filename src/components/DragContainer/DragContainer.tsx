@@ -1,20 +1,29 @@
-
-import { ReactNode, } from "react"
-import { UploadFile } from "../UploadFile/UploadFile"
+import { useCallback, useState } from "react";
+import { UploadFiles } from "../UploadFiles/UploadFiles";
 import cl from "./DragContainer.module.scss"
-import { useDrag } from "@/hooks/useDrag"
 
 interface Props {
   children: ReactNode
 }
 
 export const DragContainer = ({ children }: Props) => {
-  const { isActive, setIsActive, handleDragOver, handleDragLeave } = useDrag()
+  const [isActive, setIsActive] = useState(false)
+  const handleDragOver = useCallback(() => {
+    setIsActive(true);
+  }, [setIsActive]);
+
+  const handleDragLeave = useCallback(() => {
+    setIsActive(false);
+  }, [setIsActive]);
 
   return (
-    <div className={cl.container} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+    <div
+      className={cl.container}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+    >
       {children}
-      <UploadFile isActive={isActive} setIsActive={setIsActive} />
+      <UploadFiles isActive={isActive} setIsActive={setIsActive} />
     </div>
   )
 }

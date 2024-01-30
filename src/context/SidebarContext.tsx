@@ -6,7 +6,7 @@ interface SidebarContextProps {
 }
 
 export const SidebarContext = createContext<SidebarContextProps>({
-  isSidebarHidden: false,
+  isSidebarHidden: window.innerWidth <= 1000 ? true : false,
   setIsSidebarHidden: () => { },
 });
 

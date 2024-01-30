@@ -276,7 +276,7 @@ $transition: all 100ms ease;
     .navList {
       &Item {
         &.active {
-          background: $gray;
+          // background: $gray;
         }
       }
     }

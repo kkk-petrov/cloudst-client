@@ -6,7 +6,6 @@ import ThemeToggler from "../ThemeToggler/ThemeToggler"
 import { GoBellFill } from "react-icons/go"
 import { SearchInput } from "../Search/Search"
 import { doRequest } from "@/api/doRequest"
-import { useDrag } from "@/hooks/useDrag"
 import { Link } from "react-router-dom"
 import { UserModel } from "@/types"
 
@@ -15,8 +14,7 @@ interface Props {
 }
 
 export const Topbar = ({ user }: Props) => {
-  const { setIsActive } = useDrag()
-  const userAvatarUrl = user?.avatar !== "" ? user?.avatar : "/user.png"
+  const userAvatarUrl = (user?.avatar !== "" ? user?.avatar : "/user.png") || "/user.png"
 
   const handleClick = async () => {
     const res = await doRequest("GET", '/users')
@@ -40,7 +38,7 @@ export const Topbar = ({ user }: Props) => {
         </button>
 
         {/* TODO: uploading form */}
-        <Button onClick={() => setIsActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
+        <Button onClick={() => console.log("drop")} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
           <IoMdCloudDownload className={cl.uploadIcon} />
           Upload
         </Button>
