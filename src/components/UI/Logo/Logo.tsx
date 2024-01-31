@@ -8,7 +8,7 @@ interface Props {
   // size?: number
 }
 
-export const Logo = ({ onlyIcon = false }: Props) => {
+export const Logo = ({ onlyIcon = false, }: Props) => {
   return (
     <div className={cl.logo}>
       <div className={cl.logoIconWrapper}>

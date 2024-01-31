@@ -20,6 +20,7 @@ export const Topbar = ({ user }: Props) => {
     const res = await doRequest("GET", '/users')
     console.log(res)
   }
+  console.log(user)
 
   return (
     <div className={cl.container}>

@@ -1,10 +1,10 @@
 import { authService } from '@/services';
-import { UserID } from '@/types';
+import { UserModel } from '@/types';
 import { create } from 'zustand';
 
 interface AuthState {
   token: string | null;
-  userId: UserID | null;
+  user: UserModel | null
   isLoading: boolean
   actions: AuthActions
 }
@@ -16,7 +16,7 @@ interface AuthActions {
 
 export const useAuthStore = create<AuthState>((set) => ({
   token: localStorage.getItem('token') || null,
-  userId: parseInt(localStorage.getItem('userId')!) || null,
+  user: null,
   isLoading: false,
   actions: {
     login: async (email: string, password: string) => {
@@ -26,12 +26,11 @@ export const useAuthStore = create<AuthState>((set) => ({
       localStorage.setItem('token', data.token);
       localStorage.setItem('userId', data.user.id.toString());
 
-      set({ isLoading: false, token: data.token, userId: data.user.id });
+      set({ isLoading: false, token: data.token, user: data.user });
     },
     logout: () => {
       localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      set({ token: null, userId: null });
+      set({ token: null, user: null });
     },
   }
 }));

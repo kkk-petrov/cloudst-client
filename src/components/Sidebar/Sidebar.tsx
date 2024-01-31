@@ -7,13 +7,12 @@ import { BsGear, BsTrash3 } from "react-icons/bs";
 import cl from "./Sidebar.module.scss"
 import { Button } from "../UI/Button/Button";
 import { Logo } from "../UI/Logo/Logo";
-import { useSidebar } from "@/hooks/useSidebar";
 import { Link, useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
   const currentPage = useLocation().pathname.split('/')[1] || "/"
   const [isWrapperHovered, setIsWrapperHovered] = useState(false)
-  const { isSidebarHidden, setIsSidebarHidden } = useSidebar()
+  const [isSidebarHidden, setIsSidebarHidden] = useState(false)
 
   const nav = [
     { name: "dashboard", icon: <MdDashboard />, path: "/" },

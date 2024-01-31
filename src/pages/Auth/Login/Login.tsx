@@ -1,9 +1,10 @@
-import { Button } from "@/components/UI/Button/Button";
-import { Input } from "@/components/UI/Input/Input"
 import { authService } from "@/services";
 import { useAuthStore } from "@/store/store";
 import { LoginData } from "@/types";
 import { ChangeEvent, MouseEvent, useState } from "react"
+import cl from "./Login.module.scss"
+import { IoMail } from "react-icons/io5"
+import { MdLock } from "react-icons/md"
 
 export const Login = () => {
   const login = useAuthStore(state => state.actions.login)
@@ -37,23 +38,41 @@ export const Login = () => {
   }
 
   return (
-    <div>
-      <Input
-        type="email"
-        name="email"
-        placeholder="example@mail.com"
-        value={inputs.email}
-        onChange={handleInputChange}
-      />
-      <Input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={inputs.password}
-        onChange={handleInputChange}
-      />
-      <Button onClick={e => handleLogin(e)}>Login</Button>
-      {message && <p>{message}</p>}
+    <div className={cl.container}>
+      {/* <div className={cl.left} /> */}
+      <div className={cl.right}>
+        <div className={cl.login}>
+          <h1 className={cl.text}>Sign in</h1>
+          <span className={cl.email}>
+            <IoMail className={cl.icon} />
+            <input
+              type="email"
+              name="email"
+              placeholder="example@mail.com"
+              value={inputs.email}
+              onChange={handleInputChange}
+              className={cl.input}
+            />
+
+          </span>
+          <span className={cl.password}>
+
+            <MdLock className={cl.icon} />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={inputs.password}
+              onChange={handleInputChange}
+              className={cl.input}
+            />
+          </span>
+          <button onClick={e => handleLogin(e)} className={cl.button}>Login</button>
+          {message && <p className={cl.message}>{message}</p>}
+
+        </div>
+
+      </div>
     </div>
   )
 }

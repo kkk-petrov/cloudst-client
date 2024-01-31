@@ -6,15 +6,11 @@ import { useNavigate } from 'react-router-dom';
 export const SettingsTile = () => {
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate("/settings")
-  }
-
   return (
     <Wrapper>
-      <div className={cl.settings} onClick={() => handleClick}>
+      <div className={cl.settings} >
         {/* <FaGear className={cl.icon} size={100} /> */}
-        <SlOptions className={cl.icon} size={70} />
+        <SlOptions onClick={() => navigate("/shared")} className={cl.icon} size={70} />
       </div>
     </Wrapper>
   )
