@@ -6,14 +6,15 @@ import ThemeToggler from "../ThemeToggler/ThemeToggler"
 import { GoBellFill } from "react-icons/go"
 import { SearchInput } from "../Search/Search"
 import { doRequest } from "@/api/doRequest"
-import { Link } from "react-router-dom"
 import { UserModel } from "@/types"
+import { useAuthStore } from "@/store/store"
 
 interface Props {
   user: UserModel | null
 }
 
 export const Topbar = ({ user }: Props) => {
+  const logout = useAuthStore(store => store.actions.logout)
   const userAvatarUrl = (user?.avatar !== "" ? user?.avatar : "/user.png") || "/user.png"
 
   const handleClick = async () => {
@@ -47,10 +48,10 @@ export const Topbar = ({ user }: Props) => {
         {/* TODO: user menu */}
         <div className={cl.user}>
           <img alt="avatar" src={userAvatarUrl} height={30} width={30} className={cl.userAvatar} />
-          <Link to="auth/logout" className={cl.userButton}>
+          <button onClick={logout} className={cl.userButton}>
             <span className={cl.userName}>{user?.name}</span>
             <FaAngleDown className={cl.userButtonIcon} size="15px" />
-          </Link>
+          </button>
         </div>
 
         {/* <UploadFileForm isActive={isModalActive} setIsActive={setIsModalActive}></UploadFileForm> */}

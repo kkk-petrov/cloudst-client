@@ -5,12 +5,12 @@ import { Recent } from "@/pages/Recent/Recent"
 import { Favorites } from "@/pages/Favorites/Favorites"
 import { Trash } from "@/pages/Trash/Trash"
 import { Settings } from "@/pages/Settings/Settings"
-import { Login } from "@/pages/Auth/Login/Login"
 import { Shared } from "@/pages/Shared/Shared"
 import { useAuthStore } from "@/store/store"
-import { Logout } from "@/pages/Auth/Logout/Logout"
 import { Loader } from "../UI/Loader/Loader"
 import { Protected } from "../Protected/Protected"
+import { Signin } from "@/pages/Auth/Signin/Signin"
+import { Signup } from "@/pages/Auth/Signup/Signup"
 
 export const AppRouter = () => {
   const store = useAuthStore(store => store);
@@ -39,19 +39,19 @@ export const AppRouter = () => {
           path: "/shared",
           element: <Protected><Shared /></Protected>,
         },
+        {
+          path: "/settings",
+          element: <Protected><Settings /></Protected>,
+        },
       ],
     },
     {
-      path: "/auth/logout",
-      element: <Protected><Logout /></Protected>,
+      path: "/auth/signin",
+      element: store.token ? <Navigate to="/" /> : <Signin />,
     },
     {
-      path: "/settings",
-      element: <Protected><Settings /></Protected>,
-    },
-    {
-      path: "/auth/login",
-      element: store.token ? <Navigate to="/" /> : <Login />,
+      path: "/auth/signup",
+      element: store.token ? <Navigate to="/" /> : <Signup />,
     },
   ]);
 

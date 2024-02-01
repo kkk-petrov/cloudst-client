@@ -8,7 +8,6 @@ export type FoldersRequest = FolderID | FolderID[] | null
 export interface AuthResponse {
   user: UserModel
   token: string
-  status: "OK" | "Error"
 }
 export type UsersResponse = UserModel | UserModel[] | null
 export type FilesResponse = FileModel | FileModel[] | null

@@ -172,8 +172,9 @@ $transition: all 100ms ease;
       opacity: 1;
 
       &.active {
-        color: #fff;
-        background: $accent;
+        // color: #fff;
+        // background: $accent;
+        color: $accent;
       }
 
       &:not(:last-child) {

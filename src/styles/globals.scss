@@ -16,11 +16,17 @@ body {
 
 body {
   color: $text-gray;
-  background: $background-darker;
+  background: $background-light;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
   transition: all 300ms ease;
+}
+
+[data-theme="dark"] {
+  body {
+    background: $background-darker;
+  }
 }
 
 a {

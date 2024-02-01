@@ -17,7 +17,7 @@ export async function doRequest<T, U>(
 
     // const resData = res.data;
 
-    return { status: "OK", ...res }
+    return res
   } catch (error) {
     throw new Error(`Error during request: ${error}`)
   }

@@ -15,7 +15,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   flex-direction: row;
   background: transparent;
   transition: all 300ms ease;
@@ -44,11 +44,7 @@
     padding: 0;
     text-align: left;
     cursor: text;
-
-    &::placeholder {
-      vertical-align: bottom;
-
-    }
+    width: 100%;
   }
 
   &Hint {

@@ -9,6 +9,9 @@ $op: .1;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   span {
     width: 40px;

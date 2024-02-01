@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/store/store";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../UI/Loader/Loader";
 
@@ -13,10 +13,10 @@ export const Protected = ({ children }: Props) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/auth/login');
+      navigate('/auth/signin');
     }
   }, [isAuthenticated, navigate]);
 
-  return isAuthenticated ? children : <Loader />;
+  return isAuthenticated ? <Suspense fallback={<Loader />}>{children}</Suspense> : <Loader />;
 };
 
