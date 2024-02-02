@@ -2,7 +2,7 @@
 $op: .1;
 
 .container {
-  background: $background;
+  background: $background-light;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -17,7 +17,7 @@ $op: .1;
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    border: 6px dotted $accent;
+    border: 8px dotted $accent;
     animation: spin 1s infinite ease;
   }
 }

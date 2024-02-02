@@ -13,7 +13,7 @@ export const Protected = ({ children }: Props) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/auth/signin');
+      navigate('/auth');
     }
   }, [isAuthenticated, navigate]);
 

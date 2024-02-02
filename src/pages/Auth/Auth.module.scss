@@ -1,0 +1,24 @@
+@import "/src/styles/_colors.scss";
+
+.container {
+  background: $background;
+  width: 100svw;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  .active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+[data-theme="dark"] {
+  .container {
+    background: $background-black;
+  }
+}

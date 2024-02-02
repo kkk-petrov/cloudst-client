@@ -1,3 +1,5 @@
+import { ChangeEvent, Dispatch, MouseEvent, MutableRefObject, SetStateAction } from "react"
+
 export type UserID = number
 export type FileID = number
 export type FolderID = number
@@ -45,3 +47,4 @@ export interface RegisterData {
   name: string
   avatar?: string
 }
+

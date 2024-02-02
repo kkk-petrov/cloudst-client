@@ -1,0 +1,9 @@
+@import "/src/styles/_colors.scss";
+
+.container {
+  background: $background-light;
+}
+
+[data-theme="dark"] .container {
+  background: $background-darker;
+}

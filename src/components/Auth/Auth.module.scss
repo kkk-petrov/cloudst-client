@@ -1,0 +1,139 @@
+@import "/src/styles/_colors.scss";
+
+.form {
+  padding: 20px;
+  border-radius: 5px;
+  background: $background-light;
+  width: 25%;
+  box-shadow: 0px 3px 5px 2px rgba($text-ltgray, .3);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 600ms ease;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 200%);
+
+  .text {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .title {
+      color: #000;
+    }
+
+    .subtitle {
+      margin-top: 5px;
+    }
+  }
+
+}
+
+.reset {
+  transition: all 200ms ease;
+  color: $text-ltgray;
+  width: max-content;
+  margin: 0 auto;
+  margin-top: 5px;
+
+
+  &:hover {
+    color: #000;
+  }
+}
+
+.switch {
+  margin-top: 15px;
+  color: $text-ltgray;
+  width: 100%;
+  text-align: center;
+
+  .link {
+    transition: all 200ms ease;
+    color: $text-gray;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 16px;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    min-height: 40px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+[data-theme="dark"] {
+
+  .form {
+    background: $background-darker;
+    box-shadow: none;
+
+    .text {
+      .title {
+        color: #fff;
+      }
+
+      .subtitle {
+        color: $text-ltgray;
+      }
+    }
+  }
+
+  .reset {
+    color: rgba(#fff, .4);
+    text-decoration: underline;
+
+    &:hover {
+      color: rgba(#fff, .6);
+    }
+  }
+
+  .switch {
+    // color: $text-gray;
+
+    .link {
+      color: rgba(#fff, .4);
+      text-decoration: underline;
+
+      &:hover {
+        color: rgba(#fff, .6);
+      }
+    }
+
+  }
+}

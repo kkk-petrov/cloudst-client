@@ -9,15 +9,16 @@ import { Shared } from "@/pages/Shared/Shared"
 import { useAuthStore } from "@/store/store"
 import { Loader } from "../UI/Loader/Loader"
 import { Protected } from "../Protected/Protected"
-import { Signin } from "@/pages/Auth/Signin/Signin"
-import { Signup } from "@/pages/Auth/Signup/Signup"
+import { Auth } from "@/pages/Auth/Auth"
+import { Suspense } from "react"
+import { Test } from "@/pages/Test/Test"
 
 export const AppRouter = () => {
   const store = useAuthStore(store => store);
 
   const router = createBrowserRouter([
     {
-      element: <Layout />,
+      element: <Suspense fallback={<Loader />}><Layout /></Suspense>,
       children: [
         {
           path: "/",
@@ -46,12 +47,16 @@ export const AppRouter = () => {
       ],
     },
     {
-      path: "/auth/signin",
-      element: store.token ? <Navigate to="/" /> : <Signin />,
+      path: "/auth",
+      element: store.token ? <Navigate to="/" /> : <Auth page="signin" />,
     },
     {
       path: "/auth/signup",
-      element: store.token ? <Navigate to="/" /> : <Signup />,
+      element: store.token ? <Navigate to="/" /> : <Auth page="signup" />,
+    },
+    {
+      path: "/*",
+      element: <Test />,
     },
   ]);
 
