@@ -2,6 +2,7 @@
 import { ReactNode } from 'react';
 import { IconContext } from 'react-icons';
 import { Container } from '../UI/Container/Container';
+import { DragProvider } from '@/context/DragContext';
 import { DragContainer } from '../DragContainer/DragContainer';
 
 interface Props {
@@ -11,11 +12,13 @@ interface Props {
 const Providers = ({ children }: Props) => {
   return (
     <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: "30px" }}>
-      <Container>
-        <DragContainer>
-          {children}
-        </DragContainer>
-      </Container>
+      <DragProvider>
+        <Container>
+          <DragContainer>
+            {children}
+          </DragContainer>
+        </Container>
+      </DragProvider>
     </IconContext.Provider>
   )
 };

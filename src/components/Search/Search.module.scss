@@ -1,16 +1,5 @@
 @import "/src/styles/_colors.scss";
 
-// .wrapper {
-//   display: flex;
-//   align-items: center;
-//   justify-content: flex-start;
-//   flex-direction: row;
-//   width: 100%;
-//   height: 100%;
-//   // box-shadow: $ltgray 0px 0px 5px;
-//   border-radius: 30px;
-//   overflow: hidden;
-//
 .search {
   position: relative;
   display: flex;
@@ -23,7 +12,7 @@
   height: 100%;
   padding: 5px 20px;
 
-  border: solid 1px $ltgray;
+  outline: solid 1px $ltgray;
   border-right: none;
   border-radius: 30px;
 
@@ -91,7 +80,7 @@
   .search {
     background: $gray;
     box-shadow: none;
-    border: 1px solid $ltgray;
+    outline: 1px solid $ltgray;
 
     &Input {
       color: $text-ltgray;

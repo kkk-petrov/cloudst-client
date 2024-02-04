@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import cl from "./ThemeToggler.module.scss"
 
 const ThemeToggler = () => {
-  // const storedTheme = localStorage.getItem("theme");
-  // const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-  const defaultDark = true
+  const storedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  const defaultDark = storedTheme === "dark" || (storedTheme === null && prefersDark);
 
   const [theme, setTheme] = useState(defaultDark ? "dark" : "light");
 

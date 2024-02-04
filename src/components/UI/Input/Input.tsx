@@ -4,11 +4,11 @@ import { ChangeEventHandler, InputHTMLAttributes, useRef, useState } from 'react
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string
-  failed: boolean
+  isValid: boolean
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-export const Input = ({ label, failed, onChange, ...props }: Props) => {
+export const Input = ({ label, isValid, onChange, ...props }: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const ref = useRef<HTMLInputElement | null>(null)
 
@@ -23,9 +23,9 @@ export const Input = ({ label, failed, onChange, ...props }: Props) => {
   }
 
   return (
-    <div className={cl.container}>
+    <div className={`${cl.container} ${!isValid && cl.error}`}>
       <label className={cl.label} htmlFor={props.name}>{label}</label>
-      <span className={`${cl.inputWrapper} ${failed && cl.failed}`}>
+      <span className={cl.inputWrapper}>
         <input
           {...props}
           className={cl.input}

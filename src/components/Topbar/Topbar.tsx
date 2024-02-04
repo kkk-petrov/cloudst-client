@@ -8,6 +8,7 @@ import { SearchInput } from "../Search/Search"
 import { doRequest } from "@/api/doRequest"
 import { UserModel } from "@/types"
 import { useAuthStore } from "@/store/store"
+import { useDrag } from "@/context/DragContext"
 
 interface Props {
   user: UserModel | null
@@ -16,6 +17,8 @@ interface Props {
 export const Topbar = ({ user }: Props) => {
   const logout = useAuthStore(store => store.actions.logout)
   const userAvatarUrl = (user?.avatar !== "" ? user?.avatar : "/user.png") || "/user.png"
+
+  const { ...drag } = useDrag()
 
   const handleClick = async () => {
     const res = await doRequest("GET", '/users')
@@ -40,7 +43,7 @@ export const Topbar = ({ user }: Props) => {
         </button>
 
         {/* TODO: uploading form */}
-        <Button onClick={() => console.log("drop")} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
+        <Button onClick={() => drag.setIsActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
           <IoMdCloudDownload className={cl.uploadIcon} />
           Upload
         </Button>

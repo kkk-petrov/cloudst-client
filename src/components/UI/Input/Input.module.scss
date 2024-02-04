@@ -1,9 +1,34 @@
 @import "/src/styles/_colors.scss";
 
 .container {
-  margin-bottom: 15px;
+  width: 100%;
 
-  .label {}
+  &.error {
+    .inputWrapper {
+      border: 1px solid $red;
+    }
+
+    .inputWrapper .input,
+    .inputWrapper .input::placeholder,
+    .inputWrapper .show {
+      color: $red;
+    }
+
+    .inputWrapper .show:hover {
+      color: $red;
+      filter: brightness(70%);
+    }
+
+    .label {
+      color: $red;
+    }
+  }
+
+
+  .label {
+    transition: all 200ms ease;
+    color: $text-gray;
+  }
 
   .inputWrapper {
     display: flex;
@@ -13,21 +38,6 @@
     padding: 5px 10px;
     min-height: 40px;
     margin-top: 5px;
-
-    &.failed {
-      border: 1px solid $red;
-
-      .input,
-      .input::placeholder,
-      .show {
-        color: $red;
-      }
-
-      &.failed .show:hover {
-        color: $red;
-        filter: brightness(70%);
-      }
-    }
 
     .input {
       border: none;
@@ -60,9 +70,26 @@
 
 [data-theme='dark'] {
   .container {
-    // background: $gray;
-    // box-shadow: none;
-    // border: 1px solid $ltgray;
+    &.error {
+      .inputWrapper {
+        border: 1px solid $red;
+      }
+
+      .inputWrapper .input,
+      .inputWrapper .input::placeholder,
+      .inputWrapper .show {
+        color: $red;
+      }
+
+      .inputWrapper .show:hover {
+        color: $red;
+        filter: brightness(70%);
+      }
+
+      .label {
+        color: $red;
+      }
+    }
 
     .inputWrapper {
       border: 1px solid $ltgray;

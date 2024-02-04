@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useCallback } from "react"
-import { useDropzone } from 'react-dropzone'
+import { Dispatch, SetStateAction, useCallback, useEffect } from "react"
+import { DropzoneInputProps, DropzoneRootProps, useDropzone } from 'react-dropzone'
 import { Modal } from '../UI/Modal/Modal'
 import cl from "./UploadFiles.module.scss"
 
@@ -8,23 +8,23 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>
 }
 
-export const UploadFiles = ({ isActive, setIsActive }: Props) => {
+export const UploadFiles = ({
+  isActive,
+  setIsActive,
+}: Props) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Do something with the files
-    // setFiles(acceptedFiles)
     console.log(acceptedFiles)
   }, [])
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-  // useEffect(() => {
-  //   setIsActive(isDragActive)
-  // }, [isDragActive])
+  useEffect(() => console.log(isDragActive), [isDragActive])
 
   return (
-    <Modal isActive={isActive} setIsActive={setIsActive}>
+    <div>
       <div
         {...getRootProps()}
-        className={`${cl.container}`}
+        className={`${cl.container} ${isDragActive ? cl.active : ''}`}
       >
 
         <input {...getInputProps()} />
@@ -34,9 +34,12 @@ export const UploadFiles = ({ isActive, setIsActive }: Props) => {
             <p>Drag 'n' drop some files here, or click to select files</p>
         }
       </div>
-    </Modal>
+    </div>
   )
 }
 
 
-//  ${isDragActive ? cl.visible : ""}
+
+
+// <Modal isActive={isActive} setIsActive={setIsActive}>
+// </Modal>
