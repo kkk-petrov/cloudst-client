@@ -1,14 +1,43 @@
-import { doRequest } from "@/api/doRequest";
-import { LoginData, RegisterData } from "@/types";
-import { AuthRequest, AuthResponse } from "@/types/services";
+import {
+	AuthRequest,
+	AuthResponse,
+	LoginData,
+	RegisterData,
+} from "@/types/api";
+import { AxiosInstance } from "axios";
 
 export class AuthService {
-  public async register(data: RegisterData) {
-    return doRequest<AuthRequest, AuthResponse>("POST", '/auth/register', data);
-  }
+	private readonly URL = "/auth";
+	private axiosInstance: AxiosInstance;
 
-  public async login(data: LoginData) {
-    return doRequest<AuthRequest, AuthResponse>("POST", "/auth/login", data)
-  }
+	constructor(axiosInstance: AxiosInstance) {
+		this.axiosInstance = axiosInstance;
+	}
+
+	private async doRequest(
+		url: string = this.URL,
+		data?: AuthRequest,
+	): Promise<AuthResponse> {
+		try {
+			const res = await this.axiosInstance
+				.request({
+					method: "POST",
+					url: this.URL + url,
+					data: data,
+				})
+				.then((res) => res.data);
+
+			return res;
+		} catch (error) {
+			throw new Error(`Error during request: ${error}`);
+		}
+	}
+
+	public async register(data: RegisterData) {
+		return this.doRequest("/register", data);
+	}
+
+	public async login(data: LoginData) {
+		return this.doRequest("/login", data);
+	}
 }
-

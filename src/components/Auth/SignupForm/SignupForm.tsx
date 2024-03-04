@@ -1,10 +1,10 @@
-import { RegisterData } from "@/types"
 import { FaGithub } from "react-icons/fa"
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from "react"
 import { authService } from "@/services"
 import { useAuthStore } from "@/store/store"
 import { Input } from "@/components/UI/Input/Input"
 import cl from "../Auth.module.scss"
+import { RegisterData } from "@/types/api"
 
 export interface Props {
   active: string

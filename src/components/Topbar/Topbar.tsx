@@ -1,30 +1,31 @@
-import { FaAngleDown } from "react-icons/fa"
-import cl from "./Topbar.module.scss"
-import { Button } from "../UI/Button/Button"
-import { IoMdCloudDownload } from "react-icons/io"
-import ThemeToggler from "../ThemeToggler/ThemeToggler"
-import { GoBellFill } from "react-icons/go"
-import { SearchInput } from "../Search/Search"
-import { doRequest } from "@/api/doRequest"
-import { UserModel } from "@/types"
-import { useAuthStore } from "@/store/store"
-import { useDrag } from "@/context/DragContext"
+import { FaAngleDown } from "react-icons/fa";
+import cl from "./Topbar.module.scss";
+import { Button } from "../UI/Button/Button";
+import { IoMdCloudDownload } from "react-icons/io";
+import ThemeToggler from "../ThemeToggler/ThemeToggler";
+import { GoBellFill } from "react-icons/go";
+import { SearchInput } from "../Search/Search";
+import { useAuthStore } from "@/store/store";
+import { useDrag } from "@/context/DragContext";
+import { usersService } from "@/services";
 
-interface Props {
-  user: UserModel | null
-}
+export const Topbar = () => {
+  const actions = useAuthStore((state) => state.actions);
+  const user = useAuthStore((state) => state.user)!;
+  const userAvatarUrl = "/user.png";
 
-export const Topbar = ({ user }: Props) => {
-  const logout = useAuthStore(store => store.actions.logout)
-  const userAvatarUrl = (user?.avatar !== "" ? user?.avatar : "/user.png") || "/user.png"
-
-  const { ...drag } = useDrag()
+  const { ...drag } = useDrag();
 
   const handleClick = async () => {
-    const res = await doRequest("GET", '/users')
-    console.log(res)
-  }
-  console.log(user)
+    // const res = await usersService.getAll();
+    console.log(user);
+  };
+  console.log(useAuthStore());
+
+  const handleLogout = () => {
+    console.log("logout action");
+    actions.logout();
+  };
 
   return (
     <div className={cl.container}>
@@ -32,7 +33,7 @@ export const Topbar = ({ user }: Props) => {
         <SearchInput />
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", height: "100%", }}>
+      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
         <div className={cl.themeToggler}>
           <ThemeToggler />
         </div>
@@ -43,15 +44,29 @@ export const Topbar = ({ user }: Props) => {
         </button>
 
         {/* TODO: uploading form */}
-        <Button onClick={() => drag.setIsActive(true)} style={{ borderRadius: 30, display: "flex", alignItems: "center", marginRight: 20 }}>
+        <Button
+          onClick={() => drag.setIsActive(true)}
+          style={{
+            borderRadius: 30,
+            display: "flex",
+            alignItems: "center",
+            marginRight: 20,
+          }}
+        >
           <IoMdCloudDownload className={cl.uploadIcon} />
           Upload
         </Button>
 
         {/* TODO: user menu */}
         <div className={cl.user}>
-          <img alt="avatar" src={userAvatarUrl} height={30} width={30} className={cl.userAvatar} />
-          <button onClick={logout} className={cl.userButton}>
+          <img
+            alt="avatar"
+            src={userAvatarUrl}
+            height={30}
+            width={30}
+            className={cl.userAvatar}
+          />
+          <button onClick={handleLogout} className={cl.userButton}>
             <span className={cl.userName}>{user?.name}</span>
             <FaAngleDown className={cl.userButtonIcon} size="15px" />
           </button>
@@ -59,7 +74,6 @@ export const Topbar = ({ user }: Props) => {
 
         {/* <UploadFileForm isActive={isModalActive} setIsActive={setIsModalActive}></UploadFileForm> */}
       </div>
-
     </div>
-  )
-} 
+  );
+};

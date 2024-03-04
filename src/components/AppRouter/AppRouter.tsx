@@ -14,7 +14,7 @@ import { Suspense } from "react"
 import { Test } from "@/pages/Test/Test"
 
 export const AppRouter = () => {
-  const store = useAuthStore(store => store);
+  const store = useAuthStore();
 
   const router = createBrowserRouter([
     {
@@ -48,11 +48,11 @@ export const AppRouter = () => {
     },
     {
       path: "/auth",
-      element: store.token ? <Navigate to="/" /> : <Auth page="signin" />,
+      element: store.user ? <Navigate to="/" /> : <Auth page="signin" />,
     },
     {
       path: "/auth/signup",
-      element: store.token ? <Navigate to="/" /> : <Auth page="signup" />,
+      element: store.user ? <Navigate to="/" /> : <Auth page="signup" />,
     },
     {
       path: "/*",

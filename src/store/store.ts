@@ -1,36 +1,46 @@
-import { authService } from '@/services';
-import { UserModel } from '@/types';
-import { create } from 'zustand';
+import { authService } from "@/services";
+import { UserModel } from "@/types/models";
+import { create } from "zustand";
 
 interface AuthState {
   token: string | null;
-  user: UserModel | null
-  isLoading: boolean
-  actions: AuthActions
+  user: UserModel | null;
+  isLoading: boolean;
+  actions: AuthActions;
 }
 
 interface AuthActions {
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  token: localStorage.getItem('token') || null,
-  user: null,
+  token: localStorage.getItem("token") || null,
+  user: JSON.parse(localStorage.getItem("user")!),
   isLoading: false,
   actions: {
     login: async (email: string, password: string) => {
-      set({ isLoading: true })
-      const data = await authService.login({ email: email, password: password })
+      set({ isLoading: true });
+      const { user, token } = await authService.login({ email, password });
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data.user.id.toString());
+      console.log(user);
 
-      set({ isLoading: false, token: data.token, user: data.user });
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+
+      set({
+        isLoading: false,
+        user: JSON.parse(localStorage.getItem("user")!),
+        token: token,
+      });
     },
-    logout: () => {
-      localStorage.removeItem('token');
-      set({ token: null, user: null });
+    logout: async () => {
+      set({ isLoading: true });
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      set({ isLoading: false, user: null, token: null });
     },
-  }
+  },
 }));
