@@ -1,0 +1,43 @@
+@import "/src/styles/_colors.scss";
+
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all ease 200ms;
+
+  &:hover {
+    background: rgba($background-dark, .2);
+    color: $text-ltgray;
+    cursor: pointer;
+
+    .button {
+      opacity: 1;
+    }
+  }
+
+  p {
+    margin-left: 10px;
+    width: 40%;
+    
+  }
+
+  .button {
+    opacity: 0;
+    margin-left: auto;
+    cursor: pointer;
+    background: transparent;
+    color: rgba($red, .9);
+    border: none;
+    outline:none;
+    border-radius: 100%;
+    transition: all ease 200ms;
+    
+    &:hover {
+      color: rgba($red, 1);
+    }
+  }
+}

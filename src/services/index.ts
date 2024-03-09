@@ -7,6 +7,6 @@ const axios = await getAxiosInstance();
 
 const authService = new AuthService(axios);
 const usersService = new UsersService(axios);
-const filesService = new FilesService();
+const filesService = new FilesService(axios);
 
 export { authService, usersService, filesService };

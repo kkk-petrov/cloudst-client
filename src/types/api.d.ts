@@ -1,6 +1,9 @@
+import { UserID } from "./common";
+
 export type AuthRequest = RegisterData | LoginData;
-export type FilesRequest = FileID | FileID[] | null;
+export type FilesRequest = UploadFileData | FileID | FileID[] | null;
 export type FoldersRequest = FolderID | FolderID[] | null;
+
 export interface AuthResponse {
 	user: UserModel;
 	token: string;
@@ -9,6 +12,7 @@ export type UsersRequest = UserID | UserID[] | null;
 export type UsersResponse = UserModel | UserModel[] | null;
 export type FilesResponse = FileModel | FileModel[] | null;
 export type FoldersResponse = FolderModel | FolderModel[] | null;
+
 export interface LoginData {
 	email: string;
 	password: string;
@@ -18,4 +22,9 @@ export interface RegisterData {
 	password: string;
 	name: string;
 	avatar?: string;
+}
+
+export interface UploadFileData {
+	ownerId: UserID;
+	files: File[];
 }

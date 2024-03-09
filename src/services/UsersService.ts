@@ -18,7 +18,7 @@ export class UsersService {
 			const res = await this.axiosInstance
 				.request({
 					method: method,
-					url: this.URL + url,
+					url: url,
 					data: data,
 				})
 				.then((res) => res.data);
@@ -34,14 +34,14 @@ export class UsersService {
 	}
 
 	public async getOne(id: UserID) {
-		return this.doRequest("get", `/${id}`);
+		return this.doRequest("get", `${this.URL}/${id}`);
 	}
 
 	public async delete(id: UserID) {
-		return this.doRequest("get", `/${id}`);
+		return this.doRequest("delete", `${this.URL}/${id}`);
 	}
 
 	public async update(id: UserID, data: UsersRequest) {
-		return this.doRequest("get", `/${id}`, data);
+		return this.doRequest("put", `${this.URL}/${id}`, data);
 	}
 }

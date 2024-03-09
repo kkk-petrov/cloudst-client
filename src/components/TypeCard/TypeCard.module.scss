@@ -11,6 +11,8 @@
   flex-direction: column;
   gap: 10px;
   cursor: pointer;
+  background: rgba($blue, .3);
+
 
   &:nth-child(-n+2) {
     margin-bottom: 10px;
@@ -41,8 +43,20 @@
       }
     }
   }
-
 }
+
+#audio {
+  background: rgba($ltblue, .3);
+}
+
+#video {
+  background: rgba($purple, .3);
+}
+
+#image {
+  background: rgba($orange, .3);
+}
+
 
 [data-theme="dark"] {
   .card {
