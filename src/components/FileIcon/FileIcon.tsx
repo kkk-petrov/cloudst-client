@@ -7,8 +7,14 @@ const COLORS = {
 	image: "#F84E11",
 	video: "#C211F8",
 	audio: "#00B8DF",
-	undefined: "#5A96F5",
+	unknown: "#5A96F5",
 };
+
+enum FILETYPES {
+	image = 0,
+	video = 1,
+	audio = 2,
+}
 
 interface Props {
 	filetype?: string;
@@ -18,15 +24,18 @@ interface Props {
 }
 
 export const FileIcon = ({
-	filetype = "undefined",
+	filetype = "unknown",
 	size = 40,
 	background = true,
 	style,
 }: Props) => {
-	let color = COLORS[filetype as keyof typeof COLORS];
+	if (!(filetype in FILETYPES)) {
+		filetype = "unknown";
+	}
+	const color = COLORS[filetype as keyof typeof COLORS];
 
 	const styles = {
-		background: `rgba(${color}, ${background === false ? 0 : 0.3})`,
+		background: `${color}${background ? "30" : "00"}`,
 		width: size,
 		height: size,
 		...style,

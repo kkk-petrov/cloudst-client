@@ -1,4 +1,5 @@
-import { UserID } from "./common";
+import type { UserID } from "./common";
+import type { FileModel, FolderModel, UserModel } from "./models";
 
 export type AuthRequest = RegisterData | LoginData;
 export type FilesRequest = UploadFileData | FileID | FileID[] | null;
@@ -22,9 +23,4 @@ export interface RegisterData {
 	password: string;
 	name: string;
 	avatar?: string;
-}
-
-export interface UploadFileData {
-	ownerId: UserID;
-	files: File[];
 }

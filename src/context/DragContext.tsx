@@ -1,7 +1,7 @@
 import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
   createContext,
   useCallback,
   useContext,
@@ -46,6 +46,4 @@ export const DragProvider = ({ children }: Props) => {
   );
 };
 
-export const useDrag = () => {
-  return useContext(DragContext);
-};
+export const useDrag = () => useContext(DragContext);

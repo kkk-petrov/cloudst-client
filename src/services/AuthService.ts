@@ -1,10 +1,10 @@
-import {
+import type {
 	AuthRequest,
 	AuthResponse,
 	LoginData,
 	RegisterData,
 } from "@/types/api";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
 
 export class AuthService {
 	private readonly URL = "/auth";

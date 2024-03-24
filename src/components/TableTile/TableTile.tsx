@@ -5,11 +5,12 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import { users } from "@/dummy";
 import { Link } from "../UI/Link/Link";
 import { FaCaretDown } from "react-icons/fa";
-import { FileModel, UserModel } from "@/types/models";
+import type { FileModel } from "@/types/models";
+import { strings } from "@/utils";
 
 interface Props {
 	title: string;
-	files: FileModel[];
+	files: FileModel[] | FileModel | null;
 	limit?: number;
 }
 
@@ -65,11 +66,11 @@ export const TableTile = ({ title, files, limit }: Props) => {
 							{/* <td><Checkbox /></td> */}
 							<td>
 								<FileIcon
-									type={file.type}
+									filetype={file.type.toLowerCase().split("/")[0]}
 									size={40}
 									style={{ marginRight: "15px" }}
 								/>
-								{file.originalName}
+								{strings.truncateText(file.originalName, 15)}
 							</td>
 							<td>{file.type}</td>
 							<td>

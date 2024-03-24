@@ -1,14 +1,14 @@
-import { useState } from "react"
-import cl from "./Auth.module.scss"
-import { SigninForm } from "@/components/Auth/SigninForm/SigninForm"
-import { SignupForm } from "@/components/Auth/SignupForm/SignupForm"
+import { useState } from "react";
+import cl from "./Auth.module.scss";
+import { SigninForm } from "@/components/Auth/SigninForm/SigninForm";
+import { SignupForm } from "@/components/Auth/SignupForm/SignupForm";
 
 interface Props {
-  page: "signin" | "signup"
+  page: "signin" | "signup";
 }
 
 export const Auth = ({ page }: Props) => {
-  const [pageType, setPageType] = useState(page)
+  const [pageType, setPageType] = useState(page);
 
   return (
     <div className={cl.container}>
@@ -21,5 +21,5 @@ export const Auth = ({ page }: Props) => {
         setPageType={setPageType}
       />
     </div>
-  )
-}
+  );
+};

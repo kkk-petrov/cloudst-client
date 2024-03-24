@@ -10,7 +10,12 @@ export const FileList = ({ files, handleRemoveFile }: Props) => {
 	return (
 		<ul className={cl.list}>
 			{files.map((file, i) => (
-				<FileListItem file={file} i={i} handleRemoveFile={handleRemoveFile} />
+				<FileListItem
+					file={file}
+					key={i} // FIXME: avoid using index as key
+					index={i}
+					handleRemoveFile={handleRemoveFile}
+				/>
 			))}
 		</ul>
 	);

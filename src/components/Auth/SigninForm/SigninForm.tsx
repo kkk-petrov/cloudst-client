@@ -1,17 +1,17 @@
-import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { Input } from "@/components/UI/Input/Input";
 import { useAuthStore } from "@/store/store";
+import type { LoginData } from "@/types/api";
+import { areInputsValid, validateInput } from "@/utils/validation";
 import {
-	ChangeEvent,
-	Dispatch,
-	MouseEvent,
-	SetStateAction,
+	type ChangeEvent,
+	type Dispatch,
+	type MouseEvent,
+	type SetStateAction,
 	useState,
 } from "react";
-import { authService } from "@/services";
+import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import cl from "../Auth.module.scss";
-import { LoginData } from "@/types/api";
 
 export interface Props {
 	active: string;
@@ -22,10 +22,6 @@ export const SigninForm = ({ active, setPageType }: Props) => {
 	const login = useAuthStore((state) => state.actions.login);
 	const [message, setMessage] = useState("");
 	const [inputs, setInputs] = useState({
-		name: {
-			value: "",
-			isValid: true,
-		},
 		email: {
 			value: "",
 			isValid: true,
@@ -47,21 +43,14 @@ export const SigninForm = ({ active, setPageType }: Props) => {
 	const handleSignin = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
-		if (areInputsValid()) {
+		if (areInputsValid(inputs)) {
 			try {
 				const data: LoginData = {
 					email: inputs.email.value,
 					password: inputs.password.value,
 				};
 
-				if (data.email !== "" && data.password !== "") {
-					const res = await authService.login(data);
-
-					if (res !== null) {
-						console.log(login);
-						await login(inputs.email.value, inputs.password.value);
-					}
-				}
+				await login(data);
 			} catch (error) {
 				console.error("Login failed", error);
 			}
@@ -69,29 +58,6 @@ export const SigninForm = ({ active, setPageType }: Props) => {
 			console.log("Inputs are not valid");
 			setMessage("Inputs are not valid");
 		}
-	};
-
-	const validateInput = (name: string, value: string) => {
-		if (value.trim() === "") {
-			return false;
-		}
-
-		switch (name) {
-			case "name":
-				return value.length > 0;
-			case "email": {
-				const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-				return emailRegex.test(value);
-			}
-			case "password":
-				return value.length >= 8;
-			default:
-				return true;
-		}
-	};
-
-	const areInputsValid = () => {
-		return Object.values(inputs).every((input) => input.isValid);
 	};
 
 	return (
@@ -129,7 +95,14 @@ export const SigninForm = ({ active, setPageType }: Props) => {
 			</div>
 			<p className={cl.switch}>
 				Do not have an account yet?
-				<button onClick={() => setPageType("signup")} className={cl.link}>
+				<button
+					disabled={!areInputsValid(inputs)}
+					onClick={(e) => {
+						e.preventDefault();
+						setPageType("signup");
+					}}
+					className={cl.link}
+				>
 					Sign up
 				</button>
 			</p>

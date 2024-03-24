@@ -1,5 +1,5 @@
-import { FilesRequest, FilesResponse } from "@/types/api";
-import { AxiosInstance, Method } from "axios";
+import type { FilesRequest, FilesResponse } from "@/types/api";
+import type { AxiosInstance, Method } from "axios";
 
 export class FilesService {
 	private readonly URL = "/files";
@@ -11,14 +11,14 @@ export class FilesService {
 
 	private async doRequest(
 		method: Method,
-		url: string = this.URL,
+		url: string,
 		data?: FilesRequest,
 	): Promise<FilesResponse> {
 		try {
 			const res = await this.axiosInstance
 				.request({
 					method: method,
-					url: url,
+					url: this.URL + url,
 					data: data,
 				})
 				.then((res) => res.data);
@@ -29,13 +29,17 @@ export class FilesService {
 		}
 	}
 
-	public async upload(files: File[]) {
-		return this.doRequest("post", this.URL, files);
+	public async upload(files: FormData): Promise<FilesResponse> {
+		return this.doRequest("POST", "/upload", files);
 	}
 
-	public async getAll() {}
+	public async getAll(): Promise<FilesResponse> {
+		return this.doRequest("GET", "/");
+	}
 
-	public async getOne() {}
+	public async getOne(id: string): Promise<FilesResponse> {
+		return this.doRequest("GET", `/${id}`);
+	}
 
 	public async delete() {}
 

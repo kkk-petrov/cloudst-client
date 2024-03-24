@@ -1,46 +1,101 @@
-import { authService } from "@/services";
-import { UserModel } from "@/types/models";
+import { authService, usersService } from "@/services";
+import type { LoginData, RegisterData } from "@/types/api";
+import type { UserModel } from "@/types/models";
 import { create } from "zustand";
 
 interface AuthState {
-  token: string | null;
-  user: UserModel | null;
-  isLoading: boolean;
-  actions: AuthActions;
+	token: string | null;
+	user: UserModel | null;
+	isLoading: boolean;
+	actions: AuthActions;
 }
 
 interface AuthActions {
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
+	login: (data: LoginData) => Promise<void>;
+	register: (data: RegisterData) => Promise<void>;
+	logout: () => Promise<void>;
 }
 
+async function fetchUserData() {
+	const token = localStorage.getItem("token");
+	if (token !== null) {
+		const decodedToken = JSON.parse(atob(token.split(".")[1]));
+		const userId = decodedToken.id;
+
+		const user = await usersService.getOne(userId);
+		console.log("getting user", user);
+		return user;
+	}
+
+	return null;
+}
+
+const user = await fetchUserData();
+
 export const useAuthStore = create<AuthState>((set) => ({
-  token: localStorage.getItem("token") || null,
-  user: JSON.parse(localStorage.getItem("user")!),
-  isLoading: false,
-  actions: {
-    login: async (email: string, password: string) => {
-      set({ isLoading: true });
-      const { user, token } = await authService.login({ email, password });
+	user: user,
+	token: localStorage.getItem("token"),
+	isLoading: false,
+	actions: {
+		login: async (data) => {
+			try {
+				set({ isLoading: true });
 
-      console.log(user);
+				const { email, password } = data;
+				const { token, user } = await authService.login({ email, password });
 
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
+				localStorage.setItem("token", token);
+				set({
+					user: user,
+					token: token,
+				});
+			} catch (error) {
+				console.error(error);
+			} finally {
+				set({
+					isLoading: false,
+				});
+			}
+		},
+		register: async (data) => {
+			try {
+				set({ isLoading: true });
 
-      set({
-        isLoading: false,
-        user: JSON.parse(localStorage.getItem("user")!),
-        token: token,
-      });
-    },
-    logout: async () => {
-      set({ isLoading: true });
+				const { email, password, name, avatar } = data;
 
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
+				const { token, user } = await authService.register({
+					email,
+					password,
+					name,
+					avatar,
+				});
 
-      set({ isLoading: false, user: null, token: null });
-    },
-  },
+				localStorage.setItem("token", token);
+
+				set({
+					user: user,
+					token: token,
+				});
+			} catch (error) {
+				console.error(error);
+			} finally {
+				set({
+					isLoading: false,
+				});
+			}
+		},
+		logout: async () => {
+			try {
+				set({ isLoading: true });
+
+				localStorage.removeItem("token");
+
+				set({ token: null, user: null });
+			} catch (error) {
+				console.error(error);
+			} finally {
+				set({ isLoading: false });
+			}
+		},
+	},
 }));

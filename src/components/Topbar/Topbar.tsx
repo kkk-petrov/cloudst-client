@@ -22,7 +22,7 @@ export const Topbar = () => {
 	};
 
 	const handleLogout = () => {
-		console.error("Logout");
+		console.info("Logout");
 		actions.logout();
 	};
 

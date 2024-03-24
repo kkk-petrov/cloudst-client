@@ -288,3 +288,12 @@ $transition: all 100ms ease;
     }
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 30%;
+    .navList {
+      padding: 0px 20px;
+    }
+  }
+}
