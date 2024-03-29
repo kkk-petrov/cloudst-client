@@ -32,6 +32,12 @@
       align-items: center;
       justify-content: space-between;
       height: 100%;
+      border-radius: 10px;
+      cursor:pointer;
+
+      &:hover {
+        background: rgba($gray, .1);
+      }
 
       .head {
         cursor: pointer;
@@ -66,7 +72,7 @@
       }
 
       td {
-        padding: 10px 0px;
+        padding: 10px 0px 10px 20px;
         width: 20%;
 
         .img {

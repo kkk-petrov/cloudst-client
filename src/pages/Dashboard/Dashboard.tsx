@@ -7,14 +7,14 @@ import { StorageTile } from "@/components/StorageTile/StorageTile";
 import { TableTile } from "@/components/TableTile/TableTile";
 import { useEffect, useState } from "react";
 import { filesService } from "@/services";
-import type { FilesResponse } from "@/types/api";
+import type { FileModel } from "@/types/models";
 
 export const Dashboard = () => {
-	const [files, setFiles] = useState<FilesResponse>([]);
+	const [files, setFiles] = useState<FileModel[]>([]);
 
 	const fetchFiles = async () => {
-		const fetchedFiles = await filesService.getAll();
-		setFiles(fetchedFiles);
+		const fetchedFiles = await filesService.getAll().then((res) => res.data);
+		setFiles(fetchedFiles as FileModel[]);
 	};
 
 	useEffect(() => {

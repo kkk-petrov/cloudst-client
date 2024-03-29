@@ -7,17 +7,18 @@ import { GoBellFill } from "react-icons/go";
 import { SearchInput } from "../Search/Search";
 import { useAuthStore } from "@/store/store";
 import { useDrag } from "@/context/DragContext";
-import { usersService } from "@/services";
+import { userService } from "@/services";
 
 export const Topbar = () => {
 	const actions = useAuthStore((state) => state.actions);
 	const user = useAuthStore((state) => state.user)!;
-	const userAvatarUrl = "/user.png";
+	const userAvatarUrl = user?.avatar ? user.avatar : "/user.png";
+	console.log(userAvatarUrl);
 
 	const { ...drag } = useDrag();
 
 	const handleClick = async () => {
-		const res = await usersService.getAll();
+		const res = await userService.getAll();
 		console.info(res);
 	};
 

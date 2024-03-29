@@ -43,9 +43,7 @@ export const SignupForm = ({ active, setPageType }: Props) => {
 		}));
 	};
 
-	const handleSignup = async (e: MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-
+	const handleSignup = async () => {
 		if (areInputsValid(inputs)) {
 			try {
 				const data: RegisterData = {
@@ -67,7 +65,7 @@ export const SignupForm = ({ active, setPageType }: Props) => {
 	};
 
 	return (
-		<form className={`${cl.form} ${active}`}>
+		<div className={`${cl.form} ${active}`}>
 			<div className={cl.text}>
 				<h1 className={cl.title}>Sign up</h1>
 				<p className={cl.subtitle}>Create an account</p>
@@ -121,6 +119,6 @@ export const SignupForm = ({ active, setPageType }: Props) => {
 					Sign in
 				</button>
 			</p>
-		</form>
+		</div>
 	);
 };

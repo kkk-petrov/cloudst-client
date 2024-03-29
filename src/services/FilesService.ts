@@ -1,49 +1,47 @@
-import type { FilesRequest, FilesResponse } from "@/types/api";
-import type { AxiosInstance, Method } from "axios";
+import type { AxiosInstance } from "axios";
+import { ApiService } from "./ApiService";
 
-export class FilesService {
-	private readonly URL = "/files";
-	private axiosInstance: AxiosInstance;
-
-	constructor(axiosInstance: AxiosInstance) {
-		this.axiosInstance = axiosInstance;
+export class FilesService extends ApiService {
+	constructor(axios: AxiosInstance) {
+		super(axios, "/files");
 	}
 
-	private async doRequest(
-		method: Method,
-		url: string,
-		data?: FilesRequest,
-	): Promise<FilesResponse> {
-		try {
-			const res = await this.axiosInstance
-				.request({
-					method: method,
-					url: this.URL + url,
-					data: data,
-				})
-				.then((res) => res.data);
+	public async upload(files: FormData) {
+		return this.request("POST", "/upload", files);
+	}
 
-			return res;
-		} catch (error) {
-			throw new Error(`Error during request: ${error}`);
+	public async download(id: string) {
+		const res = await super.request("GET", `/${id}/download`, null, {
+			responseType: "blob",
+		});
+
+		if (res.data instanceof Blob) {
+			const blob = res.data;
+			const filename = res.headers["x-filename"];
+
+			const downloadLink = document.createElement("a");
+			downloadLink.href = URL.createObjectURL(blob);
+			downloadLink.download = filename;
+			downloadLink.click();
+			URL.revokeObjectURL(downloadLink.href);
+		} else {
+			console.error("Unexpected download response format");
 		}
 	}
 
-	public async upload(files: FormData): Promise<FilesResponse> {
-		return this.doRequest("POST", "/upload", files);
+	public async getAll() {
+		return this.request("GET");
 	}
 
-	public async getAll(): Promise<FilesResponse> {
-		return this.doRequest("GET", "/");
+	public async getOne(id: string) {
+		return this.request("GET", `/${id}`);
 	}
 
-	public async getOne(id: string): Promise<FilesResponse> {
-		return this.doRequest("GET", `/${id}`);
-	}
-
-	public async delete() {}
-
-	public async update() {}
-
-	public async download() {}
+	// public async delete(id: string) {
+	// 	throw new Error("Delete functionality not implemented yet");
+	// }
+	//
+	// public async update(id: string, data: updateFileData) {
+	// 	throw new Error("Update functionality not implemented yet");
+	// }
 }

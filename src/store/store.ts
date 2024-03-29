@@ -1,4 +1,4 @@
-import { authService, usersService } from "@/services";
+import { authService, userService } from "@/services";
 import type { LoginData, RegisterData } from "@/types/api";
 import type { UserModel } from "@/types/models";
 import { create } from "zustand";
@@ -20,11 +20,11 @@ async function fetchUserData() {
 	const token = localStorage.getItem("token");
 	if (token !== null) {
 		const decodedToken = JSON.parse(atob(token.split(".")[1]));
+
 		const userId = decodedToken.id;
 
-		const user = await usersService.getOne(userId);
-		console.log("getting user", user);
-		return user;
+		const res = await userService.getOne(userId);
+		return res.data;
 	}
 
 	return null;
@@ -42,7 +42,13 @@ export const useAuthStore = create<AuthState>((set) => ({
 				set({ isLoading: true });
 
 				const { email, password } = data;
-				const { token, user } = await authService.login({ email, password });
+				console.log(email, password);
+
+				const { user, token } = await authService
+					.login({ email, password })
+					.then((res) => res.data);
+
+				console.log(token, user);
 
 				localStorage.setItem("token", token);
 				set({
@@ -63,12 +69,14 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 				const { email, password, name, avatar } = data;
 
-				const { token, user } = await authService.register({
-					email,
-					password,
-					name,
-					avatar,
-				});
+				const { token, user } = await authService
+					.register({
+						email,
+						password,
+						name,
+						avatar,
+					})
+					.then((res) => res.data);
 
 				localStorage.setItem("token", token);
 

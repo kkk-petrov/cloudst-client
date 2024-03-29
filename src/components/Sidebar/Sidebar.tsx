@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { IoMdHeartEmpty, IoMdTime } from "react-icons/io";
 import { GoShareAndroid } from "react-icons/go";
@@ -14,7 +14,7 @@ export const Sidebar = () => {
 
 	const [isWrapperHovered, setIsWrapperHovered] = useState(false);
 	const [isSidebarHidden, setIsSidebarHidden] = useState(
-		window.innerWidth < 1000,
+		window.innerWidth < 1400,
 	);
 
 	const nav = [

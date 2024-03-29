@@ -1,31 +1,33 @@
+import type { ID } from "./common";
+
 export interface UserModel {
-	id: UserID;
+	id: ID;
 	email: string;
 	name: string;
 	password: string;
 	avatar: string;
-	files: FileID[] | null;
-	folders: FolderID[] | null;
+	files: ID[] | null;
+	folders: ID[] | null;
 	createdAt: Date;
 }
 
 export interface FileModel {
-	id: FileID;
+	id: ID;
 	type: string;
 	originalName: string;
 	desc: string;
 	size: number;
-	folderId?: FolderID;
-	ownerId?: UserID;
+	folderId?: ID;
+	ownerId?: ID;
 	createdAt?: string;
 	updatedAt: string;
-	sharedWith?: UserID[];
+	sharedWith?: ID[];
 }
 
 export interface FolderModel {
-	id: FolderID;
-	files: FileID[] | null;
+	id: ID;
+	files: ID[] | null;
 	name: string;
-	ownerId: UserID;
+	ownerId: ID;
 	createdAt: Date;
 }

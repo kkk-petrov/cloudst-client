@@ -1,12 +1,12 @@
-import { getAxiosInstance } from "@/api/getAxiosInstance";
+import { getAxiosInstance } from "@/api/axios";
 import { AuthService } from "./AuthService";
 import { FilesService } from "./FilesService";
-import { UsersService } from "./UsersService";
+import { UserService } from "./UserService";
 
 const axios = await getAxiosInstance();
 
 const authService = new AuthService(axios);
-const usersService = new UsersService(axios);
+const userService = new UserService(axios);
 const filesService = new FilesService(axios);
 
-export { authService, usersService, filesService };
+export { authService, userService, filesService };
