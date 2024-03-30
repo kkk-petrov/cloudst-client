@@ -10,26 +10,26 @@ import { filesService } from "@/services";
 import type { FileModel } from "@/types/models";
 
 export const Dashboard = () => {
-	const [files, setFiles] = useState<FileModel[]>([]);
+  const [files, setFiles] = useState<FileModel[]>([]);
 
-	const fetchFiles = async () => {
-		const fetchedFiles = await filesService.getAll().then((res) => res.data);
-		setFiles(fetchedFiles as FileModel[]);
-	};
+  const fetchFiles = async () => {
+    const fetchedFiles = await filesService.getAll({ limit: 6, recent: true });
+    setFiles(fetchedFiles);
+  };
 
-	useEffect(() => {
-		fetchFiles();
-	}, []);
+  useEffect(() => {
+    fetchFiles();
+  }, []);
 
-	return (
-		<div className={cl.container}>
-			<div className={cl.wrapper}>
-				<TypeTile />
-				<PinnedTile />
-				<StorageTile />
-				<SettingsTile />
-			</div>
-			<TableTile title="Recent Files" files={files} limit={6} />
-		</div>
-	);
+  return (
+    <div className={cl.container}>
+      <div className={cl.wrapper}>
+        <TypeTile />
+        <PinnedTile />
+        <StorageTile />
+        <SettingsTile />
+      </div>
+      <TableTile title="Recent Files" files={files} limit={6} />
+    </div>
+  );
 };

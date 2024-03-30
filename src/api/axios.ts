@@ -1,16 +1,13 @@
 import axios from "axios";
 import { addJWTInterceptor } from "./interceptors/jwt.interceptor";
+import { config } from "./config";
 
-const config = {
-	BASE_URL: import.meta.env.VITE_REACT_APP_API_URL,
-};
+export function getAxiosInstance() {
+  if (!config.BASE_URL) throw new Error("BASE_URL is not defined.");
 
-export async function getAxiosInstance() {
-	if (!config.BASE_URL) throw new Error("BASE_URL is not defined.");
+  const instance = axios.create({ baseURL: config.BASE_URL });
 
-	const instance = axios.create({ baseURL: config.BASE_URL });
+  addJWTInterceptor(instance);
 
-	addJWTInterceptor(instance);
-
-	return instance;
+  return instance;
 }

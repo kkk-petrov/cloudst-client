@@ -3,7 +3,7 @@ import { AuthService } from "./AuthService";
 import { FilesService } from "./FilesService";
 import { UserService } from "./UserService";
 
-const axios = await getAxiosInstance();
+const axios = getAxiosInstance();
 
 const authService = new AuthService(axios);
 const userService = new UserService(axios);
