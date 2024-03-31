@@ -8,25 +8,20 @@ import { FaCaretDown } from "react-icons/fa";
 import type { FileModel } from "@/types/models";
 import { formatting, strings } from "@/utils";
 import { filesService } from "@/services";
-import { useEffect } from "react";
+import { ID } from "@/types/common";
 
 interface Props {
   title: string;
-  files: FileModel[];
-  limit?: number;
+  files: FileModel[] | null;
+  limit: number;
 }
 
 //FIXME: refactor
 export const TableTile = ({ title, files, limit }: Props) => {
   const shared = users;
 
-  useEffect(() => {
-    console.log(files);
-  }, []);
-
-  // TODO:
-  const handleDownload = async (): Promise<void> => {
-    return filesService.download(36);
+  const handleDownload = async (id: ID): Promise<void> => {
+    return filesService.download(id);
   };
 
   return (
@@ -35,7 +30,7 @@ export const TableTile = ({ title, files, limit }: Props) => {
         <div className={cl.text}>
           {title} <Link to="#">See More</Link>
         </div>
-        {files.length !== 0 ? (
+        {files && files.length !== 0 ? (
           <table className={cl.table}>
             <tr style={{ color: "#626366" }}>
               {/* <td><Checkbox /></td> */}
@@ -74,8 +69,8 @@ export const TableTile = ({ title, files, limit }: Props) => {
               <td style={{ textAlign: "center" }}>Shared with</td>
               <td />
             </tr>
-            {(limit ? files?.slice(0, limit) : files).map((file) => (
-              <tr key={file.id} onClick={handleDownload}>
+            {(limit ? files.slice(0, limit) : files).map((file) => (
+              <tr key={file.id} onClick={() => handleDownload(file.id)}>
                 {/* <td><Checkbox /></td> */}
                 <td>
                   <FileIcon

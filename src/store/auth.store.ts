@@ -2,21 +2,22 @@ import { authService, userService } from "@/services";
 import type { LoginData, RegisterData } from "@/types/api";
 import type { UserModel } from "@/types/models";
 import { create } from "zustand";
+import { useFilesStore } from "./files.store";
 
-interface AuthState {
+interface State {
   token: string | null;
   user: UserModel | null;
   isLoading: boolean;
-  actions: AuthActions;
+  actions: Actions;
 }
 
-interface AuthActions {
+interface Actions {
   login: (data: LoginData) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => Promise<void>;
 }
 
-async function fetchUserData() {
+async function fetchUser() {
   const token = localStorage.getItem("token");
   if (token !== null) {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
@@ -28,9 +29,9 @@ async function fetchUserData() {
   return null;
 }
 
-const user = await fetchUserData();
+const user = await fetchUser();
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<State>((set) => ({
   user: user,
   token: localStorage.getItem("token"),
   isLoading: false,
@@ -48,10 +49,13 @@ export const useAuthStore = create<AuthState>((set) => ({
         console.log(token, user);
 
         localStorage.setItem("token", token);
+
         set({
           user: user,
           token: token,
         });
+
+        await useFilesStore.getState().actions.getAll()
       } catch (error) {
         console.error(error);
       } finally {
@@ -92,6 +96,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       try {
         set({ isLoading: true });
 
+        useFilesStore.setState({ files: [], storage: { total: 0, used: 0, free: 0 } })
         localStorage.removeItem("token");
 
         set({ token: null, user: null });

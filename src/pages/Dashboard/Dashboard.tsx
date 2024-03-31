@@ -8,18 +8,22 @@ import { TableTile } from "@/components/TableTile/TableTile";
 import { useEffect, useState } from "react";
 import { filesService } from "@/services";
 import type { FileModel } from "@/types/models";
+import { useFilesStore } from "@/store/files.store";
 
 export const Dashboard = () => {
-  const [files, setFiles] = useState<FileModel[]>([]);
+  // const [files, setFiles] = useState<FileModel[]>([]);
+  //
+  // const fetchFiles = async () => {
+  //   const fetchedFiles = await filesService.getAll({ limit: 5, recent: true });
+  //   setFiles(fetchedFiles);
+  // };
+  //
+  // useEffect(() => {
+  //   fetchFiles();
+  // }, []);
 
-  const fetchFiles = async () => {
-    const fetchedFiles = await filesService.getAll({ limit: 6, recent: true });
-    setFiles(fetchedFiles);
-  };
-
-  useEffect(() => {
-    fetchFiles();
-  }, []);
+  const files = useFilesStore((state) => state.files);
+  console.log(files)
 
   return (
     <div className={cl.container}>
@@ -29,7 +33,7 @@ export const Dashboard = () => {
         <StorageTile />
         <SettingsTile />
       </div>
-      <TableTile title="Recent Files" files={files} limit={6} />
+      <TableTile title="Recent Files" files={files} limit={5} />
     </div>
   );
 };

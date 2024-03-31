@@ -29,6 +29,14 @@ export interface AuthResponse {
   token: string;
 }
 
-export interface Endpoints {
-  [key: string]: string | ((id: number) => any);
+interface StorageInfo {
+  total: number
+  used: number
+  free: number
+  types?: {
+    audio: number
+    video: number
+    image: number
+    other: number
+  }
 }

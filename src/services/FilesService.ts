@@ -3,9 +3,11 @@ import { ApiService } from "./ApiService";
 import type { ID } from "@/types/common";
 import { endpoints } from "@/api/config";
 import { FileModel } from "@/types/models";
+import { StorageInfo } from "@/types/api";
 
 interface Opts {
   limit?: number;
+  offset?: number;
   recent?: boolean;
 }
 
@@ -39,24 +41,28 @@ export class FilesService extends ApiService {
   public async upload(files: FormData) {
     return this
       .request("POST", this.endpoints.upload, files)
-      .then((res) => res.data);
   }
 
   public async getAll(opts?: Opts) {
-    const params = new URLSearchParams;
+    let params = new URLSearchParams();
 
     if (opts) {
-      if (opts?.limit) {
+      if (opts.limit) {
         params.set("limit", opts.limit.toString());
       }
 
-      if (opts?.recent) {
-        params.set("recent", '');
+      if (opts.offset) {
+        params.set("limit", opts.offset.toString());
+      }
+
+      if (opts.recent) {
+        params.set("recent", "true");
       }
     }
 
-    const url = `${this.endpoints.getAll}?${params.toString()}`;
+    const url = `${this.endpoints.getAll}${params.toString().length > 0 ? `?${params.toString()}` : ''}`;
 
+    console.log(url)
     return this
       .request<FileModel[]>("GET", url)
       .then((res) => res.data);
@@ -67,6 +73,12 @@ export class FilesService extends ApiService {
       .request("GET", this.endpoints.getOne(id))
       .then((res) => res.data);
     ;
+  }
+
+  public async getStorageInfo() {
+    return this
+      .request<StorageInfo>("GET", this.endpoints.getStorageInfo)
+      .then((res) => res.data);
   }
 
   public async delete(_id: string) {
