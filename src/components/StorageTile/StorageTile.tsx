@@ -22,6 +22,7 @@ export const StorageTile = () => {
     rotation: 0.25,
     strokeLinecap: 'round',
     pathColor: "#017EFA",
+    trailColor: "#62636630",
   })
 
   return (
@@ -31,8 +32,8 @@ export const StorageTile = () => {
           <CircularProgressbarWithChildren strokeWidth={10} value={percentage} styles={styles}>
             <div className={cl.inside}>
               {percentage}%
-              { /* <span>Total: {Number.parseInt(total)} GB</span>
-              <span>Used: {used}</span> */ }
+              { /*  */}
+              <span>Total: {Number.parseInt(total)} GB</span>
             </div>
           </CircularProgressbarWithChildren>
         </div>

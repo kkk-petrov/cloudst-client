@@ -6,6 +6,7 @@
   justify-content: space-between;
   height: 100%;
   width: 100%;
+    transition: all 100ms ease;
 
 
   .inside {
@@ -49,6 +50,7 @@
       padding-left: 20px;
 
       &::before {
+        transition: all 200ms ease;
         content: "";
         width: 15px;
         height: 15px;
@@ -70,7 +72,6 @@
     .left {
       &::before {
         background: #d6d6d6;
-
       }
     }
   }
@@ -82,6 +83,14 @@
       background: $ltgray;
       color: $text-ltgray;
       box-shadow: none;
+    }
+
+    .info {
+      .left {
+        &::before {
+          background: $gray;
+        }
+      }
     }
   }
 }

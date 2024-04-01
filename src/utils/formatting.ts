@@ -1,4 +1,4 @@
-export function formatBytes(bytes: number): string {
+export function formatBytes(bytes: number, decimals = 2): string {
   const adjustedConversionFactor = 10 ** 9;
 
   if (bytes < 10 ** 6) {
@@ -6,10 +6,10 @@ export function formatBytes(bytes: number): string {
   }
 
   if (bytes < adjustedConversionFactor) {
-    return `${(bytes / 10 ** 6).toFixed(1)} MB`;
+    return `${(bytes / 10 ** 6).toFixed(decimals)} MB`;
   }
 
-  return `${(bytes / adjustedConversionFactor).toFixed(2)} GB`;
+  return `${(bytes / adjustedConversionFactor).toFixed(decimals)} GB`;
 }
 
 export function formatDate(dateString: string): string {

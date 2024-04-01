@@ -1,0 +1,40 @@
+@import "/src/styles/_colors.scss";
+
+.container {
+
+  position: relative;
+  width: 100%;
+  height: 5px;
+  margin-bottom: 15px;
+
+  .background {
+    transition: all 300ms ease;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #DDEFFC;
+    z-index: 1;
+  }
+
+  .bar {
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: $accent;
+    z-index: 2;
+
+  }
+}
+
+[data-theme='dark'] {
+  .container {
+    .background {
+      background: $gray;
+    }
+  }
+}

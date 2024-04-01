@@ -1,7 +1,10 @@
+import { useFilesStore } from "@/store/files.store";
 import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 import { FileIcon } from "../FileIcon/FileIcon";
 import cl from "./TypeCard.module.scss";
-import { useNavigate } from "react-router-dom";
+import { formatBytes } from "@/utils/formatting";
+import { Filetype, StorageInfoTypes } from "@/types/api";
 
 interface Props {
   filetype?: string;
@@ -16,8 +19,13 @@ enum Colors {
 }
 
 // TODO: file object instead of type prop
-export const TypeCard = ({ filetype = "unknown", children }: Props) => {
+export const TypeCard = ({ filetype = "other", children }: Props) => {
   const navigate = useNavigate();
+  const storage = useFilesStore((state) => state.storage);
+  const current = storage.types![filetype as Filetype];
+  const count = current.count || 0;
+  const size = current.size || 0;
+
 
   let color: Colors;
   switch (filetype.toLowerCase()) {
@@ -58,9 +66,9 @@ export const TypeCard = ({ filetype = "unknown", children }: Props) => {
       <div className={cl.cardInfo}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           {children}
-          <span>145 files</span>
+          <span>{count} files</span>
         </div>
-        2.3GB
+        {formatBytes(size, 1)}
       </div>
     </li>
   );

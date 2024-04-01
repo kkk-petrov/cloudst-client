@@ -29,14 +29,10 @@ export interface AuthResponse {
   token: string;
 }
 
-interface StorageInfo {
-  total: number
-  used: number
-  free: number
-  types?: {
-    audio: number
-    video: number
-    image: number
-    other: number
-  }
+type Filetype = "image" | "video" | "audio" | "other";
+export interface StorageInfo {
+  total: number;
+  used: number;
+  free: number;
+  types?: Record<Filetype, { size: number; count: number }>;
 }

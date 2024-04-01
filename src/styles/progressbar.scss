@@ -1,20 +1,26 @@
 @import "_colors";
+$tr: all 300ms ease;
 
-.CircularProgressbar-path {
-  stroke: $accent;
-}
-
-.CircularProgressbar-trail {
-  stroke: #d6d6d6;
-  transition: all 200ms ease;
-}
+// [data-theme="light"] {
+//   .CircularProgressbar-path {
+//     transition: $tr;
+//     stroke: $accent;
+//   }
+//
+//   .CircularProgressbar-trail {
+//     transition: $tr;
+//     stroke: #DDEFFC;
+//   }
+// }
 
 [data-theme="dark"] {
   .CircularProgressbar-path {
+    transition: $tr;
     stroke: $accent;
   }
 
   .CircularProgressbar-trail {
-    stroke: $ltgray;
+    transition: $tr;
+    stroke: #1e1e20;
   }
 }

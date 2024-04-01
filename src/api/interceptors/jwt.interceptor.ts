@@ -24,8 +24,7 @@ export const addJWTInterceptor = (axios: AxiosInstance) => {
 
       if (error.response?.status === 401 && !config.sent) {
         config.sent = true;
-        const refreshedToken = await authService
-          .refresh()
+        const refreshedToken = await authService.refresh()
 
         if (refreshedToken) {
           localStorage.setItem("token", refreshedToken);

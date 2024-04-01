@@ -14,7 +14,6 @@ export const Modal = ({ isActive, children, setIsActive }: Props) => {
     <div
       className={classes}
       onClick={() => setIsActive(false)}
-      onKeyUp={e => e.key === 'Escape' && setIsActive(false)}
     >
       <div onClick={e => e.stopPropagation()} className={cl.modal}>
         {children}
