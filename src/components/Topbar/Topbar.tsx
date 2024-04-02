@@ -43,7 +43,6 @@ export const Topbar = () => {
           <GoBellFill size="25px" />
         </button>
 
-        {/* TODO: uploading form */}
         <Button
           onClick={() => drag.setIsActive(true)}
           style={{

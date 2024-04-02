@@ -10,9 +10,14 @@ export const StorageTile = () => {
   // FIXME: fix hardcoded values 
   const storage = useFilesStore((state) => state.storage)
 
-  const total = formatting.formatBytes(storage.total)
-  const used = formatting.formatBytes(storage.used)
-  const free = formatting.formatBytes(storage.free)
+  let total, used, free =
+
+  // FIXME: FIX THIS FUCKING STORAGE
+  if (storage) {
+    total = formatting.formatBytes(storage.total)
+    used = formatting.formatBytes(storage.used)
+    free = formatting.formatBytes(storage.free)
+  }
 
 
   const percentage = (Math.round((Number.parseInt(used) / Number.parseInt(total)) * 100) / 1000).toFixed(2)

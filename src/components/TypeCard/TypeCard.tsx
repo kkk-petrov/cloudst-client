@@ -4,42 +4,43 @@ import { useNavigate } from "react-router-dom";
 import { FileIcon } from "../FileIcon/FileIcon";
 import cl from "./TypeCard.module.scss";
 import { formatBytes } from "@/utils/formatting";
-import { Filetype, StorageInfoTypes } from "@/types/api";
+import { Filetype } from "@/types/api";
 
 interface Props {
   filetype?: string;
   children: ReactNode;
 }
 
-enum Colors {
-  Orange = "#F84E11",
-  Puprle = "#C211F8",
-  Ltblue = "#00B8DF",
-  Blue = "#5A96F5",
+const Colors = {
+  orange: "#F84E11",
+  puprle: "#C211F8",
+  ltblue: "#00B8DF",
+  blue: "#5A96F5",
 }
 
 // TODO: file object instead of type prop
 export const TypeCard = ({ filetype = "other", children }: Props) => {
   const navigate = useNavigate();
+
   const storage = useFilesStore((state) => state.storage);
-  const current = storage.types![filetype as Filetype];
-  const count = current.count || 0;
-  const size = current.size || 0;
+  const current = storage?.types?.[filetype as Filetype] || { count: 0, size: 0 };
 
+  const count = current.count;
+  const size = current.size;
 
-  let color: Colors;
+  let color
   switch (filetype.toLowerCase()) {
     case "image":
-      color = Colors.Orange;
+      color = Colors.orange;
       break;
     case "video":
-      color = Colors.Puprle;
+      color = Colors.puprle;
       break;
     case "audio":
-      color = Colors.Ltblue;
+      color = Colors.ltblue;
       break;
     default:
-      color = Colors.Blue;
+      color = Colors.blue;
       break;
   }
 

@@ -19,8 +19,9 @@ export type AuthRequest = ApiRequestData & (RegisterData | LoginData);
 export interface UpdateUserData extends Partial<UserModel> { }
 export type UsersRequest = ApiRequestData & UpdateUserData;
 
-export interface UploadFilesData extends FormData { }
-export type FilesRequest = ApiRequestData & UpdateFilesData;
+export type UpdateFileData = Partial<FileModel>;
+export type UploadFilesData = FormData;
+export type FilesRequest = ApiRequestData & (UpdateFilesData | UploadFilesData);
 
 export interface FoldersRequest extends ApiRequestData { }
 
@@ -35,4 +36,11 @@ export interface StorageInfo {
   used: number;
   free: number;
   types?: Record<Filetype, { size: number; count: number }>;
+}
+
+export interface FileRequestOpts {
+  limit?: number;
+  offset?: number;
+  recent?: boolean;
+  pinned?: boolean;
 }

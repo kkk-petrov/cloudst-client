@@ -3,20 +3,13 @@ import { ApiService } from "./ApiService";
 import type { ID } from "@/types/common";
 import { endpoints } from "@/api/config";
 import { FileModel } from "@/types/models";
-import { StorageInfo } from "@/types/api";
-
-interface Opts {
-  limit?: number;
-  offset?: number;
-  recent?: boolean;
-}
+import { FileRequestOpts, StorageInfo, UpdateFileData } from "@/types/api";
 
 export class FilesService extends ApiService {
-  private readonly endpoints
+  private readonly endpoints = endpoints.files
 
   constructor(axios: AxiosInstance) {
     super(axios, "/files");
-    this.endpoints = endpoints.files
   }
 
   public async download(id: ID) {
@@ -43,7 +36,7 @@ export class FilesService extends ApiService {
       .request("POST", this.endpoints.upload, files)
   }
 
-  public async getAll(opts?: Opts) {
+  public async getAll(opts?: FileRequestOpts) {
     let params = new URLSearchParams();
 
     if (opts) {
@@ -58,6 +51,10 @@ export class FilesService extends ApiService {
       if (opts.recent) {
         params.set("recent", "true");
       }
+
+      if (opts.pinned) {
+        params.set("pinned", "true");
+      }
     }
 
     const url = `${this.endpoints.getAll}${params.toString().length > 0 ? `?${params.toString()}` : ''}`;
@@ -70,7 +67,7 @@ export class FilesService extends ApiService {
 
   public async getOne(id: ID) {
     return this
-      .request("GET", this.endpoints.getOne(id))
+      .request<FileModel>("GET", this.endpoints.getOne(id))
       .then((res) => res.data);
     ;
   }
@@ -85,7 +82,9 @@ export class FilesService extends ApiService {
     throw new Error("Delete functionality not implemented yet");
   }
 
-  public async update(_id: string, _data: any) {
-    throw new Error("Update functionality not implemented yet");
+  public async update(id: ID, data: UpdateFileData) {
+    return this
+      .request<FileModel>("PUT", this.endpoints.update(id), data)
+      .then((res) => res.data);
   }
 }

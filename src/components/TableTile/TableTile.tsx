@@ -2,27 +2,33 @@ import { Wrapper } from "../UI/Wrapper/Wrapper";
 import cl from "./TableTile.module.scss";
 import { FileIcon } from "../FileIcon/FileIcon";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { users } from "@/dummy";
 import { Link } from "../UI/Link/Link";
 import { FaCaretDown } from "react-icons/fa";
 import type { FileModel } from "@/types/models";
 import { formatting, strings } from "@/utils";
 import { filesService } from "@/services";
 import { ID } from "@/types/common";
+import { SharedWith } from "../SharedWith/SharedWith";
+import { useFilesStore } from "@/store/files.store";
 
 interface Props {
   title: string;
   files: FileModel[] | null;
-  limit: number;
+  limit?: number;
 }
 
-//FIXME: refactor
+//FIXME: refactor this shit
 export const TableTile = ({ title, files, limit }: Props) => {
-  const shared = users;
+  const togglePin = useFilesStore((s) => s.actions.togglePin);
 
   const handleDownload = async (id: ID): Promise<void> => {
     return filesService.download(id);
   };
+
+  const handleClick = async (e: React.MouseEvent, id: ID) => {
+    e.stopPropagation();
+    return togglePin(id);
+  }
 
   return (
     <Wrapper>
@@ -84,21 +90,10 @@ export const TableTile = ({ title, files, limit }: Props) => {
                 <td>{formatting.formatBytes(file.size)}</td>
                 <td>{formatting.formatDate(file.updatedAt)}</td>
                 <td style={{ textAlign: "center" }}>
-                  {file.sharedWith
-                    ? shared.map((user) => (
-                      <img
-                        className={cl.img}
-                        src={user.avatar === "" ? "/user.png" : user.avatar}
-                        alt="avatar"
-                        height={30}
-                        width={30}
-                        key={user.id}
-                      />
-                    ))
-                    : "Only you"}
+                  <SharedWith file={file} />
                 </td>
                 <td>
-                  <HiDotsHorizontal className={cl.icon} size={26} />
+                  <HiDotsHorizontal onClick={(e) => handleClick(e, file.id)} className={cl.icon} size={26} />
                 </td>
               </tr>
             ))}

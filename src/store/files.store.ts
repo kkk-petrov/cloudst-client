@@ -4,12 +4,13 @@ import { FileModel } from "@/types/models";
 import { create } from "zustand";
 import { useAuthStore } from "./auth.store";
 
-const isAuthenticated = useAuthStore.getState().token
+const isAuthenticated = useAuthStore.getState().isAuthenticated();
 
 interface State {
   files: FileModel[] | null;
+  pinned: FileModel[] | null;
   isLoading: boolean;
-  storage: StorageInfo
+  storage: StorageInfo | null
   actions: Actions;
 }
 
@@ -17,24 +18,28 @@ interface Actions {
   upload: (files: File[]) => Promise<number | null>;
   getAll: () => Promise<void>;
   getStorageInfo: () => Promise<void>;
+  getPinned: () => Promise<void>;
+  togglePin: (id: number) => Promise<void>;
 }
 
 const init = async () => {
   if (isAuthenticated) {
-    const files = await filesService.getAll();
+    const files = await filesService.getAll({ recent: true });
+    const pinned = await filesService.getAll({ recent: true, pinned: true });
     const storage = await filesService.getStorageInfo();
 
-    return { files, storage }
+    return { files, pinned, storage }
   }
-  return { files: null, storage: { total: 0, used: 0, free: 0 } }
+  return { files: null, pinned: null, storage: null }
 }
 
-const { files, storage } = await init();
+const { files, pinned, storage } = await init();
 
 export const useFilesStore = create<State>((set, get) => ({
   files: files,
-  isLoading: false,
   storage: storage,
+  pinned: pinned,
+  isLoading: false,
   actions: {
     upload: async (files: File[]) => {
 
@@ -88,6 +93,38 @@ export const useFilesStore = create<State>((set, get) => ({
       } finally {
         set({ isLoading: false });
       }
-    }
+    },
+    togglePin: async (id: number) => {
+      try {
+        set({ isLoading: true });
+
+        const file = await filesService.getOne(id);
+
+        const pinned = await filesService.update(id, { isPinned: !file.isPinned, });
+        if (pinned) {
+          await get().actions.getPinned()
+        }
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        set({ isLoading: false });
+      }
+    },
+    getPinned: async (limit?: number) => {
+      try {
+        set({ isLoading: true });
+
+        const pinned = await filesService.getAll({ pinned: true, limit: limit, recent: true });
+        if (pinned) {
+          set({ pinned });
+        }
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        set({ isLoading: false });
+      }
+    },
   },
 }))

@@ -27,7 +27,7 @@
 
     tr {
       color: $gray;
-      transition: all 200ms ease;
+      transition: all 100ms ease;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -35,7 +35,7 @@
       border-radius: 10px;
       cursor:pointer;
 
-      &:hover {
+      &:not(:first-child):hover {
         background: rgba($gray, .1);
       }
 

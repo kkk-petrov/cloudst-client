@@ -9,15 +9,15 @@ interface Props {
 
 export const Protected = ({ children }: Props) => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthStore((state) => !!state.token);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       navigate("/auth");
     }
-  }, [isAuthenticated, navigate]);
+  }, []);
 
-  return isAuthenticated ? (
+  return isAuthenticated() ? (
     <Suspense fallback={<Loader />}>{children}</Suspense>
   ) : (
     <Loader />

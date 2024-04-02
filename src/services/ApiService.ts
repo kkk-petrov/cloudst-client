@@ -3,11 +3,11 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export class ApiService {
   protected readonly axios: AxiosInstance;
-  protected readonly baseUrl: string;
+  protected readonly groupUrl: string;
 
-  constructor(axios: AxiosInstance, baseUrl: string) {
+  constructor(axios: AxiosInstance, groupUrl: string) {
     this.axios = axios;
-    this.baseUrl = baseUrl;
+    this.groupUrl = groupUrl;
   }
 
   protected async request<T>(
@@ -18,7 +18,7 @@ export class ApiService {
   ): Promise<AxiosResponse<T>> {
     try {
       const res = await this.axios.request({
-        url: this.baseUrl + url,
+        url: this.groupUrl + url,
         method,
         data,
         ...opts,

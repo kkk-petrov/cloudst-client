@@ -9,6 +9,7 @@ interface State {
   user: UserModel | null;
   isLoading: boolean;
   actions: Actions;
+  isAuthenticated: () => boolean;
 }
 
 interface Actions {
@@ -35,6 +36,7 @@ export const useAuthStore = create<State>((set) => ({
   user: user,
   token: localStorage.getItem("token"),
   isLoading: false,
+  isAuthenticated: () => !!localStorage.getItem("token"),
   actions: {
     login: async (data) => {
       try {

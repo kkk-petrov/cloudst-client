@@ -4,11 +4,10 @@ import { ApiService } from "./ApiService";
 import { endpoints } from "@/api/config";
 
 export class AuthService extends ApiService {
-  private readonly endpoints
+  private readonly endpoints = endpoints.auth
 
   constructor(axios: AxiosInstance) {
     super(axios, "/auth");
-    this.endpoints = endpoints.auth
   }
 
   public async register(data: RegisterData) {

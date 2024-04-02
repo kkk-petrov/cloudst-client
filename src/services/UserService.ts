@@ -6,11 +6,10 @@ import type { UserModel } from "@/types/models";
 import { endpoints } from "@/api/config";
 
 export class UserService extends ApiService {
-  private readonly endpoints
+  private readonly endpoints = endpoints.users
 
   constructor(axios: AxiosInstance) {
     super(axios, "/users");
-    this.endpoints = endpoints.users
   }
 
   public async getAll() {
@@ -22,6 +21,12 @@ export class UserService extends ApiService {
   public async getOne(id: ID) {
     return super
       .request<UserModel>("GET", this.endpoints.getOne(id))
+      .then((res) => res.data);
+  }
+
+  public async getMany(ids: ID[]) {
+    return super
+      .request<UserModel[]>("GET", this.endpoints.getMany(ids))
       .then((res) => res.data);
   }
 
