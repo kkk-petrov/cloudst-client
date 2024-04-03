@@ -2,9 +2,6 @@ import { filesService } from "@/services";
 import { StorageInfo } from "@/types/api";
 import { FileModel } from "@/types/models";
 import { create } from "zustand";
-import { useAuthStore } from "./auth.store";
-
-const isAuthenticated = useAuthStore.getState().isAuthenticated();
 
 interface State {
   files: FileModel[] | null;
@@ -22,23 +19,10 @@ interface Actions {
   togglePin: (id: number) => Promise<void>;
 }
 
-const init = async () => {
-  if (isAuthenticated) {
-    const files = await filesService.getAll({ recent: true });
-    const pinned = await filesService.getAll({ recent: true, pinned: true });
-    const storage = await filesService.getStorageInfo();
-
-    return { files, pinned, storage }
-  }
-  return { files: null, pinned: null, storage: null }
-}
-
-const { files, pinned, storage } = await init();
-
 export const useFilesStore = create<State>((set, get) => ({
-  files: files,
-  storage: storage,
-  pinned: pinned,
+  files: null,
+  storage: null,
+  pinned: null,
   isLoading: false,
   actions: {
     upload: async (files: File[]) => {

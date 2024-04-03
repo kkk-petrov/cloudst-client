@@ -6,6 +6,8 @@
 
   display: flex;
   flex-direction: column;
+  // align-items: center;
+  // justify-content: space-between;
   font-size: 18px;
   width: 15%;
   height: 100vh;
@@ -15,10 +17,8 @@
   position: relative;
 
   &.hidden {
-    width: 0%;
+    width: 4%;
 
-    .logoContainer,
-    .navList,
     .limit {
       visibility: hidden;
       opacity: 0;
@@ -29,17 +29,34 @@
 
 
     .logoContainer {
+      padding: 24px 20%;
+      transition: all 500ms ease;
+
       &::after {
         opacity: 0;
       }
     }
 
     .navList {
+      padding-inline: 10px;
       &Item {
-        // padding: 0px;
-        background: transparent;
-        opacity: 0;
         transition: all 200ms 0ms ease;
+        padding: 10px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        &Name {
+          width: 0%;
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        &Icon {
+          margin: 0;
+        }
+
       }
     }
 
@@ -146,7 +163,7 @@
 
     width: 100%;
     padding: 24px;
-    margin-bottom: 80px;
+    margin-bottom: 140px;
   }
 
 
@@ -156,23 +173,26 @@
     list-style-type: none;
 
     &Item {
+      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
       padding: 10px 15px;
       cursor: pointer;
-      transition: all 500ms 200ms ease, background 300ms 200ms ease, color 300ms 200ms ease;
+      // transition: all 500ms 200ms ease, background 300ms 200ms ease, color 300ms 200ms ease;
+      transition: all 300ms ease, opacity 1300ms ease;
       text-transform: capitalize;
       background: transparent;
       border-radius: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       opacity: 1;
+      visibility: visible;
 
       &.active {
-        // color: #fff;
-        // background: $accent;
-        color: $accent;
+        color: #fff;
+        background: $accent;
+        // color: $accent;
       }
 
       &:not(:last-child) {
@@ -187,9 +207,10 @@
         height: 2px;
         background: linear-gradient(to right, #90909000, #909090, #90909000);
         opacity: .1;
-        margin: 20px 0px;
+        margin: 40px 0px;
         border-radius: 5px;
         width: 80%;
+        margin-inline: auto;
 
       }
     }
@@ -249,6 +270,21 @@
       justify-content: center;
 
     }
+  }
+
+  .logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 24px;
+    cursor: pointer;
+
+    &Icon {
+
+    }
+
   }
 }
 

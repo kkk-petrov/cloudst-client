@@ -1,0 +1,27 @@
+
+@import "/src/styles/_colors.scss";
+
+.tile {
+  transition: all 200ms ease;
+  padding: 20px;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: $ltgray 0px 0px 5px;
+  display: flex;
+  // height: 100%;
+  flex: 1 0 24%;
+
+
+  &:hover {
+    box-shadow: $ltgray 0px 0px 7px;
+
+  }
+}
+
+[data-theme="dark"] {
+  .tile {
+    background: $background-black;
+    box-shadow: none;
+    color: $text-ltgray;
+  }
+}

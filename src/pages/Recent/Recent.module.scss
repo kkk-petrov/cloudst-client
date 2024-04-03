@@ -1,12 +1,14 @@
 @import "/src/styles/_colors.scss";
 
 .container {
-  padding: 30px;
-  padding-top: 10px;
   display: flex;
-  width: 100%;
-  max-height: 90svh;
-  flex-direction: column;
-  overflow: hidden;
+  flex-direction: row;
+  padding: 25px;
 
+  height: 100%;
+  flex-wrap: wrap;
+
+  gap: 20px;
+  justify-content: space-between;
+  overflow: hidden;
 }

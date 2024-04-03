@@ -14,7 +14,7 @@ import { Suspense } from "react"
 import { Test } from "@/pages/Test/Test"
 
 export const AppRouter = () => {
-  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated());
   const isLoading = useAuthStore(s => s.isLoading);
 
   const router = createBrowserRouter([
@@ -49,11 +49,11 @@ export const AppRouter = () => {
     },
     {
       path: "/auth",
-      element: isAuthenticated() ? <Navigate to="/" /> : <Auth page="signin" />,
+      element: isAuthenticated ? <Navigate to="/" /> : <Auth page="signin" />,
     },
     {
       path: "/auth/signup",
-      element: isAuthenticated() ? <Navigate to="/" /> : <Auth page="signup" />,
+      element: isAuthenticated ? <Navigate to="/" /> : <Auth page="signup" />,
     },
     {
       path: "/*",

@@ -2,10 +2,11 @@ import cl from "./PinnedTile.module.scss";
 import { Wrapper } from "../UI/Wrapper/Wrapper";
 import { Link } from "../UI/Link/Link";
 import { PinnedList } from "../PinnedList/PinnedList";
+import { Tile } from "../UI/Tile/Tile";
 
 export const PinnedTile = () => {
   return (
-    <Wrapper>
+    <Tile>
       <div className={cl.pinned}>
         <div className={cl.pinnedText}>
           Pinned Files
@@ -13,6 +14,6 @@ export const PinnedTile = () => {
         </div>
         <PinnedList />
       </div>
-    </Wrapper>
+    </Tile>
   );
 };

@@ -4,23 +4,22 @@ import 'react-circular-progressbar/dist/styles.css';
 import "@/styles/progressbar.scss"
 import cl from './StorageTile.module.scss'
 import { useFilesStore } from '@/store/files.store';
-import { formatting } from '@/utils';
+import { formatBytes } from '@/utils/formatting';
+import { Tile } from '../UI/Tile/Tile';
 
 export const StorageTile = () => {
-  // FIXME: fix hardcoded values 
   const storage = useFilesStore((state) => state.storage)
 
-  let total, used, free =
-
-  // FIXME: FIX THIS FUCKING STORAGE
+  let total, used, free, percentage
   if (storage) {
-    total = formatting.formatBytes(storage.total)
-    used = formatting.formatBytes(storage.used)
-    free = formatting.formatBytes(storage.free)
+    total = formatBytes(storage.total, 0)
+    used = formatBytes(storage.used)
+    free = formatBytes(storage.free, 0)
+
+    percentage = Number.parseFloat((Math.round((Number.parseInt(used) / Number.parseInt(total)) * 100) / 1000).toFixed(2))
   }
 
 
-  const percentage = (Math.round((Number.parseInt(used) / Number.parseInt(total)) * 100) / 1000).toFixed(2)
 
   const size = 190
   const styles = buildStyles({
@@ -31,14 +30,14 @@ export const StorageTile = () => {
   })
 
   return (
-    <Wrapper>
+    <Tile>
       <div className={cl.container}>
         <div style={{ width: size, height: size, margin: "0 auto" }}>
-          <CircularProgressbarWithChildren strokeWidth={10} value={percentage} styles={styles}>
+          <CircularProgressbarWithChildren strokeWidth={10} value={percentage || 0} styles={styles}>
             <div className={cl.inside}>
               {percentage}%
               { /*  */}
-              <span>Total: {Number.parseInt(total)} GB</span>
+              <span>Total: {total}</span>
             </div>
           </CircularProgressbarWithChildren>
         </div>
@@ -48,6 +47,6 @@ export const StorageTile = () => {
         </div>
 
       </div>
-    </Wrapper>
+    </Tile>
   )
 }

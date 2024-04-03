@@ -8,8 +8,10 @@ import { SearchInput } from "../Search/Search";
 import { useAuthStore } from "@/store/auth.store";
 import { useDrag } from "@/context/DragContext";
 import { userService } from "@/services";
+import { useNavigate } from "react-router-dom";
 
 export const Topbar = () => {
+  const navigate = useNavigate()
   const actions = useAuthStore((state) => state.actions);
   const user = useAuthStore((state) => state.user)!;
   const userAvatarUrl = user?.avatar ? user.avatar : "/user.png";
@@ -25,6 +27,7 @@ export const Topbar = () => {
   const handleLogout = () => {
     console.info("Logout");
     actions.logout();
+    navigate("/auth")
   };
 
   return (

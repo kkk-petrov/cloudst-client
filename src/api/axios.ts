@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "./config";
-import { addJWTInterceptor } from "./interceptors/access.interceptor";
+import { addJWTInterceptor } from "./interceptors/jwt.interceptor";
 
 export const createAxiosInstance = () => {
   if (!config.BASE_URL) throw new Error("BASE_URL is not defined.");

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
-import { IoMdHeartEmpty, IoMdTime } from "react-icons/io";
+import { IoIosLogOut, IoMdHeartEmpty, IoMdTime } from "react-icons/io";
 import { GoShareAndroid } from "react-icons/go";
 import { BsGear, BsTrash3 } from "react-icons/bs";
 
@@ -11,12 +11,20 @@ import { Link, useLocation } from "react-router-dom";
 import { useFilesStore } from "@/store/files.store";
 import { formatBytes } from "@/utils/formatting";
 import { ProgressBar } from "../UI/ProgressBar/ProgressBar";
+import { useAuthStore } from "@/store/auth.store";
 
 export const Sidebar = () => {
   const currentPage = useLocation().pathname.split("/")[1] || "/";
   const storage = useFilesStore((state) => state.storage)
-  const total = formatBytes(storage.total, 0)
-  const used = formatBytes(storage.used)
+  const logout = useAuthStore((state) => state.actions.logout)
+
+  let total, used, percentage
+  if (storage) {
+    total = formatBytes(storage.total, 0)
+    used = formatBytes(storage.used)
+    percentage = Number.parseFloat((Math.round((Number.parseInt(used) / Number.parseInt(total)) * 100) / 1000).toFixed(2))
+  }
+
 
   console.log(storage)
 
@@ -43,7 +51,7 @@ export const Sidebar = () => {
           }`}
       />
       <div className={cl.logoContainer}>
-        <Logo />
+        <Logo onlyIcon={isSidebarHidden} />
       </div>
 
       <button
@@ -59,14 +67,14 @@ export const Sidebar = () => {
       <ul className={cl.navList}>
         {nav.map((item) =>
           item.name !== "divider" ? (
-            <li key={item.name}>
+            <li key={item.path}>
               <Link
                 to={item.path || "error"}
                 className={`${cl.navListItem} ${item.path === currentPage ? cl.active : ""
                   }`}
               >
                 <span className={cl.navListItemIcon}>{item.icon}</span>
-                {item.name}
+                <span className={cl.navListItemName}>{item.name}</span>
               </Link>
             </li>
           ) : (
@@ -75,17 +83,23 @@ export const Sidebar = () => {
         )}
       </ul>
 
-      <div className={cl.limit}>
-        <div className={cl.limitInfo}>
-          {/*<span className={cl.limitInfoBar} />*/}
-          <ProgressBar percentage={Math.round((Number.parseInt(used) / Number.parseInt(total)))} />
-          {`${used} of ${total} `}
-          Used
-        </div>
-        <div className={cl.limitButton}>
-          <Button>Upgrade Now</Button>
-        </div>
+      <div className={cl.logout} onClick={() => logout()}>
+        <IoIosLogOut size={40} className={cl.logoutIcon} />
       </div>
     </div>
   );
 };
+
+
+// <div className={cl.limit}>
+//   <div className={cl.limitInfo}>
+//     {/*<span className={cl.limitInfoBar} />*/}
+//
+//     <ProgressBar percentage={percentage || 0} />
+//     {`${used} of ${total} `}
+//     Used
+//   </div>
+//   <div className={cl.limitButton}>
+//     <Button>Upgrade Now</Button>
+//   </div>
+// </div>
